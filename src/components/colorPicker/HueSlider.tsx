@@ -1,12 +1,17 @@
 import styled from "styled-components";
+import { useSelectedColor } from "../../context/SelectedColorProvider";
 
 export default function HueSlider() {
+  const { hue, setHue } = useSelectedColor();
+
   return (
     <S_HueSlider 
       id="hueSlider"
       type="range"
       min={0}
       max={360}
+      value={hue}
+      onChange={(e) => setHue(parseInt(e.target.value))}
     />
   );
 }

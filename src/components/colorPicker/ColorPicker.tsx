@@ -5,7 +5,7 @@ import ColorPickerRect from "./ColorPickerRect";
 export default function ColorPicker() {
   return (
     <S_ColorPickerContainer>
-      <ColorPickerRect hue={1}/>
+      <ColorPickerRect />
       <ColorPickerOptions />
     </S_ColorPickerContainer>
   );
