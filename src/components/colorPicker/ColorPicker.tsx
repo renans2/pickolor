@@ -1,7 +1,17 @@
-import ColorPickerRect from "./colorPickerRect/ColorPickerRect";
+import styled from "styled-components";
+import ColorPickerOptions from "./ColorPickerOptions";
+import ColorPickerRect from "./ColorPickerRect";
 
 export default function ColorPicker() {
   return (
-    <ColorPickerRect hue={1}/>
+    <S_ColorPickerContainer>
+      <ColorPickerRect hue={1}/>
+      <ColorPickerOptions />
+    </S_ColorPickerContainer>
   );
 }
+
+const S_ColorPickerContainer = styled.div`
+  border-radius: 20px;
+  border: 1px solid gray;
+`;

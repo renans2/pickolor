@@ -23,14 +23,14 @@ const S_ColorPickerRect = styled.div.attrs<{
     backgroundColor: `hsl(${$hue}, 100%, 50%)`,
   }
 }))`
-  width: 400px;
-  height: 400px;
-  border-radius: 15px;
+  width: 430px;
+  height: 250px;
+  border-radius: 20px 20px 0 0;
   position: relative;
 
   &::before {
     content: "";
-    border-radius: 15px;
+    border-radius: 20px 20px 0 0;
     position: absolute;
     inset: 0;
     background: linear-gradient(to right, white, transparent);
@@ -38,7 +38,7 @@ const S_ColorPickerRect = styled.div.attrs<{
 
   &::after {
     content: "";
-    border-radius: 15px;
+    border-radius: 20px 20px 0 0;
     position: absolute;
     inset: 0;
     background: linear-gradient(to top, black, transparent);
