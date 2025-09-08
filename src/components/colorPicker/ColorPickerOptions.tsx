@@ -1,11 +1,12 @@
 import styled from "styled-components";
 import HueSlider from "./HueSlider";
+import ColorModeAndValuesSelector from "./ColorModeAndValuesSelector";
 
 export default function ColorPickerOptions() {
   return (
     <S_ColorPickerOptionsContainer>
       <HueSlider />
-      <span>321</span>
+      <ColorModeAndValuesSelector />
     </S_ColorPickerOptionsContainer>
   );
 }
