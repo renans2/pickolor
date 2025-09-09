@@ -15,7 +15,7 @@ export default function HueSlider() {
       id="hueSlider"
       type="range"
       min={0}
-      max={360}
+      max={359}
       value={hue}
       onChange={handleHueChange}
     />
