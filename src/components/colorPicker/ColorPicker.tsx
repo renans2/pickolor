@@ -14,4 +14,5 @@ export default function ColorPicker() {
 const S_ColorPickerContainer = styled.div`
   border-radius: 20px;
   border: 1px solid gray;
+  grid-area: picker;
 `;

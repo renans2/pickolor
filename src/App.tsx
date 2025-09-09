@@ -1,17 +1,30 @@
+import styled from "styled-components";
 import ColorPicker from "./components/colorPicker/ColorPicker";
+import ColorPreview from "./components/preview/ColorPreview";
 import SelectedColorProvider from "./context/SelectedColorProvider";
+import Clipboard from "./components/clipboard/Clipboard";
 
-function App() {
+export default function App() {
 
   return (
     <SelectedColorProvider>
-      <header>
+      {/* <header>
         <p>Color picker</p>
-      </header>
+      </header> */}
 
-      <ColorPicker />
+      <S_Container>
+        <ColorPicker />
+        <ColorPreview />
+        <Clipboard />
+      </S_Container>
     </SelectedColorProvider>
   )
 }
 
-export default App
+const S_Container = styled.div`
+  display: grid;
+  grid-template-areas:
+    "picker preview"
+    "picker clipboard";
+  gap: 10px;
+`;
