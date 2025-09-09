@@ -116,6 +116,7 @@ export function HexSelector() {
 
   useEffect(() => {
     setHexInput(hex);
+    setInvalid(false);
   }, [hex]);
 
   return (
