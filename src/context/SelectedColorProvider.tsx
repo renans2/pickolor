@@ -3,11 +3,13 @@ import type { RGB } from "../types/RGB";
 import type { HSV } from "../types/HSV";
 import type { PinPosition } from "../types/PinPosition";
 import chroma, { type Color } from "chroma-js";
+import type { HEX } from "../types/HEX";
 
 type ColorContextProps = {
   color: Color;
   setColor: Dispatch<SetStateAction<Color>>;
   rgb: RGB;
+  hex: HEX;
   hsv: HSV;
   hue: number;
   pinPosition: PinPosition;
@@ -21,6 +23,7 @@ export default function SelectedColorProvider({
   const [color, setColor] = useState<Color>(chroma.rgb(255, 255, 255));
 
   const rgb: RGB = color.rgb();
+  const hex: HEX = color.hex();
   const hsv: HSV = color.hsv().map(val => Number.isNaN(val) ? 0 : val) as HSV;
   const hue = hsv[0];
   const pinPosition = {
@@ -33,6 +36,7 @@ export default function SelectedColorProvider({
       color,
       setColor,
       rgb,
+      hex,
       hsv,
       hue,
       pinPosition,

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import styled from "styled-components";
 import type { ColorMode } from "../../types/ColorMode";
-import { HsvSelector, RgbSelector } from "./ValuesSelectors";
+import { HexSelector, HsvSelector, RgbSelector } from "./ValuesSelectors";
 
 export default function ColorModeAndValuesSelector() {
   const [colorMode, setColorMode] = useState<ColorMode>("RGB");
@@ -15,11 +15,13 @@ export default function ColorModeAndValuesSelector() {
       >
         <option value="RGB">RGB</option>
         <option value="HSV">HSV</option>
+        <option value="HEX">HEX</option>
       </select>
 
       <S_ValuesSelectorContainer>
         {colorMode === "RGB" && <RgbSelector />}
         {colorMode === "HSV" && <HsvSelector />}
+        {colorMode === "HEX" && <HexSelector />}
       </S_ValuesSelectorContainer>
     </S_Container>
   );
@@ -33,6 +35,7 @@ const S_Container = styled.div`
 
 const S_ValuesSelectorContainer = styled.div`
   display: flex;
+  flex: 1;
   gap: 10px;
   padding: 10px;
   border-radius: 15px;

@@ -1,5 +1,7 @@
 import styled from "styled-components";
 import { useSelectedColor } from "../../context/SelectedColorProvider";
+import chroma from "chroma-js";
+import { useEffect, useState } from "react";
 
 export function RgbSelector() {
   const { rgb, color, setColor } = useSelectedColor();
@@ -92,6 +94,47 @@ export function HsvSelector() {
   );
 }
 
+const HEX6 = /^#[0-9A-Fa-f]{6}$/;
+
+export function HexSelector() {
+  const { hex, setColor } = useSelectedColor();
+  const [hexInput, setHexInput] = useState(hex);
+  const [invalid, setInvalid] = useState(false);
+
+  const handleChangeHexColor = (e: React.ChangeEvent<HTMLInputElement>) => {
+    let input = e.target.value;
+    setHexInput(input);
+
+    if (HEX6.test(input)) {
+      const newColor = chroma(e.target.value);
+      setColor(newColor);
+      setInvalid(false);
+    } else {
+      setInvalid(true);
+    }
+  }
+
+  useEffect(() => {
+    setHexInput(hex);
+  }, [hex]);
+
+  return (
+    <>
+      <label htmlFor="hex">
+        <S_HexInput 
+          id="hex"
+          value={hexInput}
+          onChange={handleChangeHexColor}
+        />
+      </label>
+
+      {invalid && (
+        <p>the input is invalid</p>
+      )}
+    </>
+  );
+}
+
 const S_RgbInput = styled.input.attrs({
   type: "number",
   min: 0,
@@ -105,4 +148,10 @@ const S_HsvInput = styled.input.attrs({
   min: 0,
 })`
   width: 50px;
+`;
+
+const S_HexInput = styled.input.attrs({
+  type: "text",
+})`
+  width: 100px;
 `;

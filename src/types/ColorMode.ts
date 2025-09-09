@@ -1,1 +1,1 @@
-export type ColorMode = "RGB" | "HSV";
+export type ColorMode = "RGB" | "HSV" | "HEX";
