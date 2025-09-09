@@ -22,6 +22,7 @@ export default function App() {
 }
 
 const S_Container = styled.div`
+  position: relative;
   display: grid;
   grid-template-areas:
     "picker preview"
