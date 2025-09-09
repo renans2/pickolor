@@ -2,11 +2,12 @@ import styled from "styled-components";
 import { useSelectedColor } from "../../context/SelectedColorProvider";
 import { useEffect, useRef, useState } from "react";
 import { COLOR_PICKER_RECT_HEIGHT, COLOR_PICKER_RECT_WIDTH } from "../../constants/dimensions";
-import chroma from "chroma-js";
+import chroma, { type Color } from "chroma-js";
 
 export default function ColorPickerRect() {
   const { 
     pinPosition: { left, top },
+    color,
     setColor,
     hue,
   } = useSelectedColor();
@@ -69,6 +70,7 @@ export default function ColorPickerRect() {
       <S_ColorPin 
         $left={left}
         $top={top}
+        $color={color}
       />
     </S_ColorPickerRect>
   );
@@ -108,10 +110,12 @@ const S_ColorPickerRect = styled.div.attrs<{
 const S_ColorPin = styled.div.attrs<{
   $left: number;
   $top: number;
+  $color: Color;
 }>((props) => ({
   style: {
     left: `${props.$left}px`,
     top: `${props.$top}px`,
+    backgroundColor: props.$color.css(),
   }
 }))`
   position: absolute;
@@ -119,7 +123,7 @@ const S_ColorPin = styled.div.attrs<{
   width: 20px;
   height: 20px;
   border-radius: 100%;
-  border: 4px solid white;
+  border: 3px solid white;
   z-index: 1;
   background-color: black;
   box-shadow: 0 0 5px rgba(0,0,0,0.8);
