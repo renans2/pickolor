@@ -1,19 +1,16 @@
-import React, { createContext, useContext, useEffect, useRef, useState, type Dispatch, type RefObject, type SetStateAction } from "react";
+import React, { createContext, useContext, useState, type Dispatch, type SetStateAction } from "react";
 import type { RGB } from "../types/RGB";
 import type { HSV } from "../types/HSV";
 import type { PinPosition } from "../types/PinPosition";
-import chroma from "chroma-js";
+import chroma, { type Color } from "chroma-js";
 
 type ColorContextProps = {
-  divRef: RefObject<HTMLDivElement | null>
-  pinPosition: PinPosition;
-  setPinPosition: Dispatch<SetStateAction<PinPosition>>;
-  hue: number;
-  setHue: Dispatch<SetStateAction<number>>;
+  color: Color;
+  setColor: Dispatch<SetStateAction<Color>>;
   rgb: RGB;
-  setRgb: Dispatch<SetStateAction<RGB>>;
   hsv: HSV;
-  setHsv: Dispatch<SetStateAction<HSV>>;
+  hue: number;
+  pinPosition: PinPosition;
 }
 
 const SelectedColorContext = createContext<ColorContextProps>({} as ColorContextProps);
@@ -21,51 +18,24 @@ const SelectedColorContext = createContext<ColorContextProps>({} as ColorContext
 export default function SelectedColorProvider({
   children
 }: { children: React.ReactNode}) {
-  const [hue, setHue] = useState(0);
-  const [rgb, setRgb] = useState<RGB>([0, 0, 0]);
-  const [hsv, setHsv] = useState<HSV>([0, 0, 0]);
-  const [pinPosition, setPinPosition] = useState<PinPosition>({ left: 0, top: 0 });
-  const divRef = useRef<HTMLDivElement>(null);
+  const [color, setColor] = useState<Color>(chroma.rgb(255, 255, 255));
 
-  // useEffect(() => {
-  //   if (!divRef.current) return;
-    
-  //   const { left, top } = pinPosition;
-  //   const div = divRef.current.getBoundingClientRect();
-  //   const saturation = (left / div.width);
-  //   const value = (1 - (top / div.height));
-
-  //   const color = chroma.hsv(hue, saturation, value);
-  //   setRgb(color.rgb());
-  //   setHsv(color.hsv());
-  // }, [pinPosition]);
-
-  useEffect(() => {
-    if (!divRef.current) return;
-    
-    const color = chroma.rgb(rgb[0], rgb[1], rgb[2]);
-    const hsv = color.hsv().map(val => Number.isNaN(val) ? 0 : val);
-    setHsv(hsv as HSV);
-    setHue(hsv[0]);
-    
-    const div = divRef.current?.getBoundingClientRect();
-    setPinPosition({
-      left: hsv[1] * div.width,
-      top: (1 - hsv[2]) * div.height
-    });
-  }, [rgb]);
+  const rgb: RGB = color.rgb();
+  const hsv: HSV = color.hsv().map(val => Number.isNaN(val) ? 0 : val) as HSV;
+  const hue = hsv[0];
+  const pinPosition = {
+    left: hsv[1] * 430,
+    top: (1 - hsv[2]) * 250
+  };
 
   return (
     <SelectedColorContext.Provider value={{
-      divRef,
-      pinPosition,
-      setPinPosition,
-      hue,
-      setHue,
+      color,
+      setColor,
       rgb,
-      setRgb,
       hsv,
-      setHsv,
+      hue,
+      pinPosition,
     }}>
       {children}
     </SelectedColorContext.Provider>

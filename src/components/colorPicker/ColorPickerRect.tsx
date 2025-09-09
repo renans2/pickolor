@@ -1,19 +1,17 @@
 import styled from "styled-components";
 import { useSelectedColor } from "../../context/SelectedColorProvider";
-import { useEffect, useState } from "react";
-
-// type ColorPickerRectProps = {
-//   hue: number;
-// }
+import { useEffect, useRef, useState } from "react";
+import { COLOR_PICKER_RECT_HEIGHT, COLOR_PICKER_RECT_WIDTH } from "../../constants/dimensions";
+import chroma from "chroma-js";
 
 export default function ColorPickerRect() {
   const { 
-    pinPosition: { left, top }, 
-    setPinPosition, 
-    divRef,
+    pinPosition: { left, top },
+    setColor,
     hue,
   } = useSelectedColor();
   const [isDragging, setIsDragging] = useState(false);
+  const divRef = useRef<HTMLDivElement>(null);
 
   const updatePinPosition = (clientX: number, clientY: number) => {
     if (!divRef.current) return;
@@ -25,7 +23,11 @@ export default function ColorPickerRect() {
     left = Math.max(0, Math.min(left, div.width));
     top = Math.max(0, Math.min(top, div.height));
 
-    setPinPosition({ left, top });
+    const saturation = (left / div.width);
+    const value = (1 - (top / div.height));
+
+    const newColor = chroma.hsv(hue, saturation, value);
+    setColor(newColor);
   }
 
   const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -81,8 +83,8 @@ const S_ColorPickerRect = styled.div.attrs<{
     backgroundColor: `hsl(${$hue}, 100%, 50%)`,
   }
 }))`
-  width: 430px;
-  height: 250px;
+  width: ${COLOR_PICKER_RECT_WIDTH}px;
+  height: ${COLOR_PICKER_RECT_HEIGHT}px;
   border-radius: 20px 20px 0 0;
   position: relative;
 

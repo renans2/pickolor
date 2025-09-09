@@ -1,51 +1,43 @@
 import styled from "styled-components";
 import { useSelectedColor } from "../../context/SelectedColorProvider";
-import type { RGB } from "../../types/RGB";
 
 export function RgbSelector() {
-  const { rgb, setRgb } = useSelectedColor();
+  const { rgb, color, setColor } = useSelectedColor();
+
+  const handleChangeRgbChannel = (
+    e: React.ChangeEvent<HTMLInputElement>, 
+    channel: "r" | "g" | "b", 
+  ) => {
+    const newColor = color.set(`rgb.${channel}`, parseInt(e.target.value));
+    setColor(newColor);
+  }
 
   return (
     <>
       <label htmlFor="r">
         <span>R: </span>
-        <S_Input 
-          id="r" 
-          type="number" 
+        <S_RgbInput 
+          id="r"
           value={rgb[0]}
-          onChange={(e) => setRgb((prev) => {
-            const copy = [...prev] as RGB;
-            copy[0] = parseInt(e.target.value);
-            return copy;
-          })}
+          onChange={(e) => handleChangeRgbChannel(e, "r")}
         />
       </label>
 
       <label htmlFor="g">
         <span>G: </span>
-        <S_Input 
-          id="g" 
-          type="number"
+        <S_RgbInput 
+          id="g"
           value={rgb[1]}
-          onChange={(e) => setRgb((prev) => {
-            const copy = [...prev] as RGB;
-            copy[1] = parseInt(e.target.value);
-            return copy;
-          })}
+          onChange={(e) => handleChangeRgbChannel(e, "g")}
         />
       </label>
 
       <label htmlFor="b">
         <span>B: </span>
-        <S_Input 
-          id="b" 
-          type="number"
+        <S_RgbInput 
+          id="b"
           value={rgb[2]}
-          onChange={(e) => setRgb((prev) => {
-            const copy = [...prev] as RGB;
-            copy[2] = parseInt(e.target.value);
-            return copy;
-          })}
+          onChange={(e) => handleChangeRgbChannel(e, "b")}
         />
       </label>
     </>
@@ -53,35 +45,64 @@ export function RgbSelector() {
 }
 
 export function HsvSelector() {
+  const { hsv, color, setColor } = useSelectedColor();
+
+  const handleChangeHsvChannel = (
+    e: React.ChangeEvent<HTMLInputElement>, 
+    channel: "h" | "s" | "v", 
+  ) => {
+    let val = parseInt(e.target.value);
+    val = channel === "h" ? val : val / 100;
+    const newColor = color.set(`hsv.${channel}`, val);
+    setColor(newColor);
+  }
+
   return (
     <>
       <label htmlFor="h">
         <span>H: </span>
-        <S_Input 
-          id="h" 
-          type="number"
+        <S_HsvInput 
+          id="h"
+          max={360}
+          value={Math.round(hsv[0])}
+          onChange={(e) => handleChangeHsvChannel(e, "h")}
         />
       </label>
 
       <label htmlFor="s">
         <span>S: </span>
-        <S_Input 
-          id="s" 
-          type="number"
+        <S_HsvInput 
+          id="s"
+          max={100}
+          value={Math.round(hsv[1] * 100)}
+          onChange={(e) => handleChangeHsvChannel(e, "s")}
         />
       </label>
 
       <label htmlFor="v">
         <span>V: </span>
-        <S_Input 
-          id="v" 
-          type="number"
+        <S_HsvInput 
+          id="v"
+          max={100}
+          value={Math.round(hsv[2] * 100)}
+          onChange={(e) => handleChangeHsvChannel(e, "v")}
         />
       </label>
     </>
   );
 }
 
-const S_Input = styled.input`
+const S_RgbInput = styled.input.attrs({
+  type: "number",
+  min: 0,
+  max: 255,
+})`
+  width: 50px;
+`;
+
+const S_HsvInput = styled.input.attrs({
+  type: "number",
+  min: 0,
+})`
   width: 50px;
 `;
