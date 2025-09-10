@@ -3,8 +3,9 @@ import type { DefaultTheme } from "styled-components";
 export const theme: DefaultTheme = {
   border: "1px solid #AFAFAF",
   shadow: {
-    surface: "1px 1px 5px rgba(0, 0, 0, 0.25)",
-    detail: "1px 1px 3px rgba(0, 0, 0, 0.25)",
+    surface: "1px 1px 7px rgba(0, 0, 0, 0.25)",
+    detail: "0px 2px 3px rgba(0, 0, 0, 0.25)",
+    detailSmall: "1px 1px 3px rgba(0, 0, 0, 0.15)",
   },
   rounded: {
     xs: "5px",
@@ -16,5 +17,6 @@ export const theme: DefaultTheme = {
     surface: "#FFFFFF",
     textPrimary: "#818181",
     textAccent: "#626262",
+    textError: "#FF6C6C",
   }
 }

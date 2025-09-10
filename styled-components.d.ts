@@ -6,6 +6,7 @@ declare module "styled-components" {
     shadow: {
       surface: string;
       detail: string;
+      detailSmall: string;
     }
     rounded: {
       xs: string;
@@ -17,6 +18,7 @@ declare module "styled-components" {
       surface: string;
       textPrimary: string;
       textAccent: string;
+      textError: string;
     }
   }
 }

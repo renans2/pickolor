@@ -78,21 +78,17 @@ export default function ColorPickerRect() {
 
 const S_ColorPickerRect = styled.div.attrs<{
   $hue: number
-}>(({ 
-  $hue 
-}) => ({
-  style: {
-    backgroundColor: `hsl(${$hue}, 100%, 50%)`,
-  }
+}>(({ $hue }) => ({
+  style: { backgroundColor: `hsl(${$hue}, 100%, 50%)` }
 }))`
   width: ${COLOR_PICKER_RECT_WIDTH}px;
   height: ${COLOR_PICKER_RECT_HEIGHT}px;
-  border-radius: 20px 20px 0 0;
+  border-radius: ${({ theme }) => `${theme.rounded.xl} ${theme.rounded.xl} 0 0`};
   position: relative;
 
   &::before {
     content: "";
-    border-radius: 20px 20px 0 0;
+    border-radius: ${({ theme }) => `${theme.rounded.xl} ${theme.rounded.xl} 0 0`};
     position: absolute;
     inset: 0;
     background: linear-gradient(to right, white, transparent);
@@ -100,7 +96,7 @@ const S_ColorPickerRect = styled.div.attrs<{
 
   &::after {
     content: "";
-    border-radius: 20px 20px 0 0;
+    border-radius: ${({ theme }) => `${theme.rounded.xl} ${theme.rounded.xl} 0 0`};
     position: absolute;
     inset: 0;
     background: linear-gradient(to top, black, transparent);
@@ -126,6 +122,6 @@ const S_ColorPin = styled.div.attrs<{
   border: 3px solid white;
   z-index: 1;
   background-color: black;
-  box-shadow: 0 0 5px rgba(0,0,0,0.8);
+  box-shadow: 0 0 3px rgba(0,0,0,0.8);
   pointer-events: none;
 `;

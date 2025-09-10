@@ -4,15 +4,18 @@ import ColorPickerRect from "./ColorPickerRect";
 
 export default function ColorPicker() {
   return (
-    <S_ColorPickerContainer>
+    <S_Container>
       <ColorPickerRect />
       <ColorPickerOptions />
-    </S_ColorPickerContainer>
+    </S_Container>
   );
 }
 
-const S_ColorPickerContainer = styled.div`
-  border-radius: 20px;
-  border: 1px solid gray;
+const S_Container = styled.div`
+  background-color: ${({ theme }) => theme.colors.surface};
+  border: ${({ theme }) => theme.border};
+  box-shadow: ${({ theme }) => theme.shadow.surface};
+  border-radius: ${({ theme }) => theme.rounded.xl};
+
   grid-area: picker;
 `;

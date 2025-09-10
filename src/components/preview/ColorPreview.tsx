@@ -50,6 +50,10 @@ const S_ColorPreview = styled.div.attrs<{
     backgroundColor: props.$color.css(),
   }
 }))`
+  border: ${({ theme }) => theme.border};
+  box-shadow: ${({ theme }) => theme.shadow.surface};
+  border-radius: ${({ theme }) => theme.rounded.xl};
+  
   width: 300px;
   height: ${COLOR_PICKER_RECT_HEIGHT}px;
   grid-area: preview;

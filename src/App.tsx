@@ -3,12 +3,14 @@ import ColorPicker from "./components/colorPicker/ColorPicker";
 import ColorPreview from "./components/preview/ColorPreview";
 import SelectedColorProvider from "./context/SelectedColorProvider";
 import Clipboard from "./components/clipboard/Clipboard";
+import { GlobalStyles } from "./globalStyles";
 import { theme } from "./theme";
 
 export default function App() {
 
   return (
     <ThemeProvider theme={theme}>
+      <GlobalStyles />
       <SelectedColorProvider>
         {/* <header>
           <p>Color picker</p>
@@ -30,5 +32,5 @@ const S_Container = styled.div`
   grid-template-areas:
     "picker preview"
     "picker clipboard";
-  gap: 10px;
+  gap: 20px;
 `;

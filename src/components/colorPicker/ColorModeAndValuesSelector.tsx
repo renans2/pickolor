@@ -8,7 +8,7 @@ export default function ColorModeAndValuesSelector() {
   
   return (
     <S_Container>
-      <select 
+      <S_Select 
         id="colorMode" 
         value={colorMode}
         onChange={(e) => setColorMode(e.target.value as ColorMode)}
@@ -16,7 +16,7 @@ export default function ColorModeAndValuesSelector() {
         <option value="RGB">RGB</option>
         <option value="HSV">HSV</option>
         <option value="HEX">HEX</option>
-      </select>
+      </S_Select>
 
       <S_ValuesSelectorContainer>
         {colorMode === "RGB" && <RgbSelector />}
@@ -31,14 +31,41 @@ const S_Container = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+`;
+
+const S_Select = styled.select`
+  border: ${({ theme }) => theme.border};
+  border-radius: ${({ theme }) => theme.rounded.sm};
+  color: ${({ theme }) => theme.colors.textPrimary};
+
+  padding: 5px;
+  width: 100px;
 `;
 
 const S_ValuesSelectorContainer = styled.div`
-  display: flex;
-  flex: 1;
-  gap: 10px;
-  padding: 10px;
-  border-radius: 15px;
+  border: ${({ theme }) => theme.border};
+  border-radius: ${({ theme }) => theme.rounded.xl};
 
-  border: 1px solid gray;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex: 1;
+  padding: 5px 10px;
+
+  & > label {
+    color: ${({ theme }) => theme.colors.textPrimary};
+    width: fit-content;
+  }
+
+  & input {
+    flex: 1;
+    color: ${({ theme }) => theme.colors.textAccent};
+    border-radius: ${({ theme }) => theme.rounded.xs};
+    border: none;
+    font-weight: 500;
+    font-size: 1rem;
+    padding: 3px;
+  }
 `;

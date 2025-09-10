@@ -124,13 +124,14 @@ export function HexSelector() {
       <label htmlFor="hex">
         <S_HexInput 
           id="hex"
+          type="text"
           value={hexInput}
           onChange={handleChangeHexColor}
         />
       </label>
 
       {invalid && (
-        <p>the input is invalid</p>
+        <S_Error>The input is invalid!</S_Error>
       )}
     </>
   );
@@ -141,7 +142,7 @@ const S_RgbInput = styled.input.attrs({
   min: 0,
   max: 255,
 })`
-  width: 50px;
+  /* width: 50px; */
 `;
 
 const S_HsvInput = styled.input.attrs({
@@ -151,8 +152,10 @@ const S_HsvInput = styled.input.attrs({
   width: 50px;
 `;
 
-const S_HexInput = styled.input.attrs({
-  type: "text",
-})`
+const S_HexInput = styled.input`
   width: 100px;
+`;
+
+const S_Error = styled.span`
+  color: ${({ theme }) => theme.colors.textError};
 `;

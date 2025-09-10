@@ -27,8 +27,9 @@ const S_HueSlider = styled.input`
   appearance: none;
 
   &::-webkit-slider-runnable-track {
+    box-shadow: ${({ theme }) => theme.shadow.detail};
     height: 10px;
-    border-radius: 3px;
+    border-radius: 100px;
     background: linear-gradient(
       to right, 
       hsl(0, 100%, 50%), 
@@ -42,13 +43,16 @@ const S_HueSlider = styled.input`
   }
 
   &::-webkit-slider-thumb {
+    background-color: rgba(255, 255, 255, .75);
+    backdrop-filter: blur(3px);
+    box-shadow: ${({ theme }) => theme.shadow.detail};
+    border: ${({ theme }) => theme.border};
+
     -webkit-appearance: none;
     appearance: none;
     width: 30px;
     height: 30px;
     border-radius: 100%;
-    background-color: white;
-    border: 1px solid gray;
     margin-top: -10px
   }
 `;

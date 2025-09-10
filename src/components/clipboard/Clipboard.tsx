@@ -2,14 +2,18 @@ import styled from "styled-components";
 
 export default function Clipboard() {
   return (
-    <S_Clipboard>
-    </S_Clipboard>
+    <S_Container>
+    </S_Container>
   );
 }
 
-const S_Clipboard = styled.div`
+const S_Container = styled.div`
+  background-color: ${({ theme }) => theme.colors.surface};
+  border: ${({ theme }) => theme.border};
+  box-shadow: ${({ theme }) => theme.shadow.surface};
+  border-radius: ${({ theme }) => theme.rounded.xl};
+
   width: 100%;
   height: 100px;
-  border: 1px solid black;
   grid-area: clipboard;
 `;
