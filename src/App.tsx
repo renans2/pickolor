@@ -1,23 +1,26 @@
-import styled from "styled-components";
+import styled, { ThemeProvider } from "styled-components";
 import ColorPicker from "./components/colorPicker/ColorPicker";
 import ColorPreview from "./components/preview/ColorPreview";
 import SelectedColorProvider from "./context/SelectedColorProvider";
 import Clipboard from "./components/clipboard/Clipboard";
+import { theme } from "./theme";
 
 export default function App() {
 
   return (
-    <SelectedColorProvider>
-      {/* <header>
-        <p>Color picker</p>
-      </header> */}
+    <ThemeProvider theme={theme}>
+      <SelectedColorProvider>
+        {/* <header>
+          <p>Color picker</p>
+        </header> */}
 
-      <S_Container>
-        <ColorPicker />
-        <ColorPreview />
-        <Clipboard />
-      </S_Container>
-    </SelectedColorProvider>
+        <S_Container>
+          <ColorPicker />
+          <ColorPreview />
+          <Clipboard />
+        </S_Container>
+      </SelectedColorProvider>
+    </ThemeProvider>
   )
 }
 
