@@ -21,4 +21,8 @@ export const GlobalStyles = createGlobalStyle`
   input:not([type="range"]):focus, select:focus {
     outline: 2px solid ${({ theme }) => theme.colors.textPrimary};
   }
+
+  button:not(:disabled) {
+    cursor: pointer;
+  }
 `;
