@@ -1,11 +1,14 @@
 import { useSelectedColor } from "../../context/SelectedColorProvider";
 import { useState } from "react";
 import type { Color } from "chroma-js";
-import { S_Container, S_SaveButton, S_SavedColorItem, S_SavedColorOptions, S_SavedColorPreview, S_SavedColorsList } from "./styles";
+import { S_Container, S_OptionsButton, S_SaveButton, S_SavedColorItem, S_SavedColorOptions, S_SavedColorsList, S_SmallColorPreview } from "./styles";
+import { Eye, Pencil, Trash2 } from "lucide-react";
+import { useTheme } from "styled-components";
 
 export default function SavedColors() {
   const { color, setColor } = useSelectedColor();
   const [savedColors, setSavedColors] = useState<Color[]>([]);
+  const { colors: { textPrimary } } = useTheme();
 
   const handleSaveNewColor = () => {
     setSavedColors(prev => {
@@ -25,10 +28,9 @@ export default function SavedColors() {
 
   return (
     <S_Container>
-      <S_SaveButton
-        onClick={handleSaveNewColor}
-      >
-        Save color!
+      <S_SaveButton onClick={handleSaveNewColor}>
+        <span>Save color</span>
+        <S_SmallColorPreview $color={color} />
       </S_SaveButton>
 
       <S_SavedColorsList>
@@ -37,10 +39,22 @@ export default function SavedColors() {
             key={savedColors.length - i - 1} 
           >
             <S_SavedColorOptions>
-              <button onClick={() => handleRemoveSavedColor(i)}>Del</button>
-              <button onClick={() => handleSetAsCurrentColor(color)}>See</button>
+              <S_OptionsButton title="Delete" onClick={() => handleRemoveSavedColor(i)}>
+                <Trash2 size={18} strokeWidth={2} color={textPrimary} />
+              </S_OptionsButton>
+
+              <S_OptionsButton title="Set as current color" onClick={() => handleSetAsCurrentColor(color)}>
+                <Eye size={18} strokeWidth={2} color={textPrimary} />
+              </S_OptionsButton>
+              
+              <S_OptionsButton title="Edit" onClick={() => handleSetAsCurrentColor(color)}>
+                <Pencil size={18} strokeWidth={2} color={textPrimary} />
+              </S_OptionsButton>
             </S_SavedColorOptions>
-            <S_SavedColorPreview $color={color} />
+
+            <S_SmallColorPreview 
+              $color={color}
+            />
           </S_SavedColorItem>
         ))}
       </S_SavedColorsList>

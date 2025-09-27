@@ -13,15 +13,18 @@ export const S_Container = styled(S_MainSurface)`
 `;
 
 export const S_SaveButton = styled.button`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
   border: ${({ theme }) => theme.border};
-  border-radius: ${({ theme }) => theme.rounded.xs};
-  background-color: white;
-  box-shadow: ${({ theme }) => theme.shadow.detailSmall};
+  border-radius: ${({ theme }) => theme.rounded.xl};
   padding: 7px 7px;
-  color: ${({ theme }) => theme.colors.textAccent};
   font-weight: 600;
   font-size: 1rem;
   transition: transform 100ms;
+  background-color: white;
+  color: ${({ theme }) => theme.colors.textAccent};
 
   &:hover {
     transform: scale(1.03);
@@ -69,14 +72,32 @@ export const S_SavedColorItem = styled.li`
 
 export const S_SavedColorOptions = styled.div`
   flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: 100%;
 `;
 
-export const S_SavedColorPreview = styled.div<{
+export const S_OptionsButton = styled.button`
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  aspect-ratio: 1;
+  border-radius: 1000px;
+  border: 1px solid #0000001f;
+
+  &:hover {
+    filter: brightness(.8);
+  }
+`;
+
+export const S_SmallColorPreview = styled.div<{
   $color: Color;
 }>`
   border: ${({ theme }) => theme.border};
   background-color: ${({ $color }) => `${$color}`};
-  /* border-radius: ${({ theme }) => theme.rounded.xl}; */
   height: 100%;
   aspect-ratio: 1;
   transition: aspect-ratio 200ms;
