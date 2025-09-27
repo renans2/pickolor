@@ -4,6 +4,7 @@ import type { HSV } from "../types/HSV";
 import type { PinPosition } from "../types/PinPosition";
 import chroma, { type Color } from "chroma-js";
 import type { HEX } from "../types/HEX";
+import { COLOR_PICKER_RECT_HEIGHT, COLOR_PICKER_RECT_WIDTH } from "../constants/dimensions";
 
 type ColorContextProps = {
   color: Color;
@@ -27,8 +28,8 @@ export default function SelectedColorProvider({
   const hsv: HSV = color.hsv().map(val => Number.isNaN(val) ? 0 : val) as HSV;
   const hue = hsv[0];
   const pinPosition = {
-    left: hsv[1] * 430,
-    top: (1 - hsv[2]) * 250
+    left: hsv[1] * COLOR_PICKER_RECT_WIDTH,
+    top: (1 - hsv[2]) * COLOR_PICKER_RECT_HEIGHT
   };
 
   return (

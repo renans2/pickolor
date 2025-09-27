@@ -13,13 +13,14 @@ export const S_Container = styled(S_MainSurface)`
 `;
 
 export const S_SaveButton = styled.button`
-  border: none;
+  border: ${({ theme }) => theme.border};
   border-radius: ${({ theme }) => theme.rounded.xs};
-  background-color: black;
+  background-color: white;
   box-shadow: ${({ theme }) => theme.shadow.detailSmall};
   padding: 7px 7px;
-  color: white;
+  color: ${({ theme }) => theme.colors.textAccent};
   font-weight: 600;
+  font-size: 1rem;
   transition: transform 100ms;
 
   &:hover {
@@ -50,14 +51,33 @@ export const S_SavedColorsList = styled.ul`
   }
 `;
 
-export const S_SavedColor = styled.li<{
-  $color: Color;
-}>`
-  border-radius: ${({ theme }) => theme.rounded.xs};
-  background: ${({ $color }) => `linear-gradient(to right, transparent 40%, ${$color} 90%, ${$color})`};
+export const S_SavedColorItem = styled.li`
   display: flex;
-  gap: 5px;
+  gap: 10px;
   align-items: center;
   min-height: 30px;
   list-style: none;
+
+  &:hover {
+    background-color: ${({ theme }) => theme.colors.bg};
+
+    > :last-child {
+      aspect-ratio: 3;
+    }
+  }
+`;
+
+export const S_SavedColorOptions = styled.div`
+  flex: 1;
+`;
+
+export const S_SavedColorPreview = styled.div<{
+  $color: Color;
+}>`
+  border: ${({ theme }) => theme.border};
+  background-color: ${({ $color }) => `${$color}`};
+  /* border-radius: ${({ theme }) => theme.rounded.xl}; */
+  height: 100%;
+  aspect-ratio: 1;
+  transition: aspect-ratio 200ms;
 `;

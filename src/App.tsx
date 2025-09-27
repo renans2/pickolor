@@ -31,7 +31,7 @@ export default function App() {
 
 const S_Container = styled.div`
   display: grid;
-  grid-template-columns: ${COLOR_PICKER_RECT_WIDTH}px 200px 200px;
+  grid-template-columns: ${COLOR_PICKER_RECT_WIDTH}px 150px 250px;
   grid-template-rows: ${COLOR_PICKER_RECT_HEIGHT}px 100px;
   grid-template-areas:
     "picker preview savedColors"

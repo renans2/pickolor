@@ -1,7 +1,7 @@
 import { useSelectedColor } from "../../context/SelectedColorProvider";
 import { useState } from "react";
 import type { Color } from "chroma-js";
-import { S_Container, S_SaveButton, S_SavedColor, S_SavedColorsList } from "./styles";
+import { S_Container, S_SaveButton, S_SavedColorItem, S_SavedColorOptions, S_SavedColorPreview, S_SavedColorsList } from "./styles";
 
 export default function SavedColors() {
   const { color, setColor } = useSelectedColor();
@@ -33,13 +33,15 @@ export default function SavedColors() {
 
       <S_SavedColorsList>
         {savedColors.map((color, i) => (
-          <S_SavedColor 
+          <S_SavedColorItem 
             key={savedColors.length - i - 1} 
-            $color={color}
           >
-            <button onClick={() => handleRemoveSavedColor(i)}>Del</button>
-            <button onClick={() => handleSetAsCurrentColor(color)}>See</button>
-          </S_SavedColor>
+            <S_SavedColorOptions>
+              <button onClick={() => handleRemoveSavedColor(i)}>Del</button>
+              <button onClick={() => handleSetAsCurrentColor(color)}>See</button>
+            </S_SavedColorOptions>
+            <S_SavedColorPreview $color={color} />
+          </S_SavedColorItem>
         ))}
       </S_SavedColorsList>
     </S_Container>
