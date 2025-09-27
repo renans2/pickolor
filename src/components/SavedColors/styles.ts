@@ -13,17 +13,21 @@ export const S_Container = styled(S_MainSurface)`
 `;
 
 export const S_SaveButton = styled.button`
-  border: ${({ theme }) => theme.border};
-  border-radius: ${({ theme }) => theme.rounded.sm};
-  background-color: ${({ theme }) => theme.colors.surface};
+  border: none;
+  border-radius: ${({ theme }) => theme.rounded.xs};
+  background-color: black;
   box-shadow: ${({ theme }) => theme.shadow.detailSmall};
   padding: 7px 7px;
-  color: ${({ theme }) => theme.colors.textPrimary};
+  color: white;
   font-weight: 600;
+  transition: transform 100ms;
+
+  &:hover {
+    transform: scale(1.03);
+  }
 
   &:active {
-    box-shadow: none;
-    transform: translateY(3px);
+    transform: scale(0.95);
   }
 `;
 
