@@ -1,17 +1,14 @@
 import type { Color } from "chroma-js";
 import styled from "styled-components";
+import { S_MainSurface } from "../../base/MainSurface";
 
-export const S_ColorPreview = styled.div.attrs<{ 
+export const S_ColorPreview = styled(S_MainSurface).attrs<{ 
   $color: Color 
 }>((props) => ({
   style: {
     backgroundColor: props.$color.css(),
   }
 }))`
-  border: ${({ theme }) => theme.border};
-  box-shadow: ${({ theme }) => theme.shadow.surface};
-  border-radius: ${({ theme }) => theme.rounded.sm};
-
   position: relative;
   width: 100%;
   height: 100%;
