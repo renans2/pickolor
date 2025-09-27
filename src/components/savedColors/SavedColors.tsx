@@ -50,7 +50,7 @@ const S_Container = styled.div`
   background-color: ${({ theme }) => theme.colors.surface};
   border: ${({ theme }) => theme.border};
   box-shadow: ${({ theme }) => theme.shadow.surface};
-  border-radius: ${({ theme }) => theme.rounded.xl};
+  border-radius: ${({ theme }) => theme.rounded.sm};
 
   padding: 10px;
   width: 100%;

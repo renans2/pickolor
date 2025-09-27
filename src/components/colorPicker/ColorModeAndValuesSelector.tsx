@@ -46,7 +46,7 @@ const S_Select = styled.select`
 
 const S_ValuesSelectorContainer = styled.div`
   border: ${({ theme }) => theme.border};
-  border-radius: ${({ theme }) => theme.rounded.xl};
+  border-radius: ${({ theme }) => theme.rounded.sm};
 
   display: flex;
   justify-content: space-between;

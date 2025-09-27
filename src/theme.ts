@@ -17,6 +17,6 @@ export const theme: DefaultTheme = {
     surface: "#FFFFFF",
     textPrimary: "#818181",
     textAccent: "#626262",
-    textError: "#FF6C6C",
+    textError: "#ff4c4cff",
   }
 }

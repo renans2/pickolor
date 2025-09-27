@@ -83,12 +83,12 @@ const S_ColorPickerRect = styled.div.attrs<{
 }))`
   width: ${COLOR_PICKER_RECT_WIDTH}px;
   height: ${COLOR_PICKER_RECT_HEIGHT}px;
-  border-radius: ${({ theme }) => `${theme.rounded.xl} ${theme.rounded.xl} 0 0`};
+  border-radius: ${({ theme }) => `${theme.rounded.sm} ${theme.rounded.sm} 0 0`};
   position: relative;
 
   &::before {
     content: "";
-    border-radius: ${({ theme }) => `${theme.rounded.xl} ${theme.rounded.xl} 0 0`};
+    border-radius: ${({ theme }) => `${theme.rounded.sm} ${theme.rounded.sm} 0 0`};
     position: absolute;
     inset: 0;
     background: linear-gradient(to right, white, transparent);
@@ -96,7 +96,7 @@ const S_ColorPickerRect = styled.div.attrs<{
 
   &::after {
     content: "";
-    border-radius: ${({ theme }) => `${theme.rounded.xl} ${theme.rounded.xl} 0 0`};
+    border-radius: ${({ theme }) => `${theme.rounded.sm} ${theme.rounded.sm} 0 0`};
     position: absolute;
     inset: 0;
     background: linear-gradient(to top, black, transparent);

@@ -21,7 +21,7 @@ const S_ColorPreview = styled.div.attrs<{
 }))`
   border: ${({ theme }) => theme.border};
   box-shadow: ${({ theme }) => theme.shadow.surface};
-  border-radius: ${({ theme }) => theme.rounded.xl};
+  border-radius: ${({ theme }) => theme.rounded.sm};
 
   position: relative;
   width: 100%;
