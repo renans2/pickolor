@@ -1,7 +1,7 @@
-import styled from "styled-components";
-import { useSelectedColor } from "../../context/SelectedColorProvider";
+import { useSelectedColor } from "../../../../../context/SelectedColorProvider";
 import chroma from "chroma-js";
 import { useEffect, useState } from "react";
+import { S_Error, S_HexInput, S_HsvInput, S_RgbInput } from "./styles";
 
 export function RgbSelector() {
   const { rgb, color, setColor } = useSelectedColor();
@@ -136,26 +136,3 @@ export function HexSelector() {
     </>
   );
 }
-
-const S_RgbInput = styled.input.attrs({
-  type: "number",
-  min: 0,
-  max: 255,
-})`
-  /* width: 50px; */
-`;
-
-const S_HsvInput = styled.input.attrs({
-  type: "number",
-  min: 0,
-})`
-  width: 50px;
-`;
-
-const S_HexInput = styled.input`
-  width: 100px;
-`;
-
-const S_Error = styled.span`
-  color: ${({ theme }) => theme.colors.textError};
-`;

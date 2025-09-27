@@ -1,0 +1,11 @@
+import styled from "styled-components";
+
+export const S_ColorPickerOptionsContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  padding: 20px;
+  gap: 20px;
+`;

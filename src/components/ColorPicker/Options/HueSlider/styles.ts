@@ -1,28 +1,6 @@
 import styled from "styled-components";
-import { useSelectedColor } from "../../context/SelectedColorProvider";
-import type React from "react";
 
-export default function HueSlider() {
-  const { hue, color, setColor } = useSelectedColor();
-
-  const handleHueChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newColor = color.set("hsl.h", parseInt(e.target.value));
-    setColor(newColor);
-  }
-
-  return (
-    <S_HueSlider 
-      id="hueSlider"
-      type="range"
-      min={0}
-      max={359}
-      value={hue}
-      onChange={handleHueChange}
-    />
-  );
-}
-
-const S_HueSlider = styled.input`
+export const S_HueSlider = styled.input`
   width: 100%;
   appearance: none;
 

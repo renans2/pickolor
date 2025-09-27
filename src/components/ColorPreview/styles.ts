@@ -1,18 +1,7 @@
-import styled from "styled-components";
-import { useSelectedColor } from "../../context/SelectedColorProvider";
 import type { Color } from "chroma-js";
+import styled from "styled-components";
 
-export default function ColorPreview() {
-  const { color } = useSelectedColor();
-
-  return (
-    <S_ColorPreview 
-      $color={color}
-    />
-  );
-}
-
-const S_ColorPreview = styled.div.attrs<{ 
+export const S_ColorPreview = styled.div.attrs<{ 
   $color: Color 
 }>((props) => ({
   style: {

@@ -1,11 +1,11 @@
 import styled, { ThemeProvider } from "styled-components";
-import ColorPicker from "./components/colorPicker/ColorPicker";
-import ColorPreview from "./components/preview/ColorPreview";
+import ColorPicker from "./components/ColorPicker";
+import ColorPreview from "./components/ColorPreview";
 import SelectedColorProvider from "./context/SelectedColorProvider";
-import Clipboard from "./components/clipboard/Clipboard";
-import { GlobalStyles } from "./globalStyles";
-import { theme } from "./theme";
-import SavedColors from "./components/savedColors/SavedColors";
+import Clipboard from "./components/Clipboard";
+import { GlobalStyles } from "./styles/global";
+import { theme } from "./styles/theme";
+import SavedColors from "./components/SavedColors";
 import { COLOR_PICKER_RECT_HEIGHT, COLOR_PICKER_RECT_WIDTH } from "./constants/dimensions";
 
 export default function App() {

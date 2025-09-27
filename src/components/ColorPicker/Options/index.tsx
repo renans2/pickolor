@@ -1,6 +1,6 @@
-import styled from "styled-components";
 import HueSlider from "./HueSlider";
 import ColorModeAndValuesSelector from "./ColorModeAndValuesSelector";
+import { S_ColorPickerOptionsContainer } from "./styles";
 
 export default function ColorPickerOptions() {
   return (
@@ -10,13 +10,3 @@ export default function ColorPickerOptions() {
     </S_ColorPickerOptionsContainer>
   );
 }
-
-const S_ColorPickerOptionsContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-
-  padding: 20px;
-  gap: 20px;
-`;
