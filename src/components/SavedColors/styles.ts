@@ -1,6 +1,7 @@
 import type { Color } from "chroma-js";
 import styled from "styled-components";
 import { S_MainSurface } from "../../base/MainSurface";
+import { motion } from "motion/react";
 
 export const S_Container = styled(S_MainSurface)`
   padding: 10px;
@@ -33,6 +34,15 @@ export const S_SaveButton = styled.button`
   &:active {
     transform: scale(0.95);
   }
+
+  &:disabled {
+    transform: scale(1);
+    filter: brightness(.9);
+
+    > :last-child {
+      display: none;
+    }
+  }
 `;
 
 export const S_SavedColorsList = styled.ul`
@@ -54,7 +64,7 @@ export const S_SavedColorsList = styled.ul`
   }
 `;
 
-export const S_SavedColorItem = styled.li`
+export const S_SavedColorItem = styled(motion.li)`
   display: flex;
   gap: 10px;
   align-items: center;
@@ -91,13 +101,20 @@ export const S_OptionsButton = styled.button`
   &:hover {
     filter: brightness(.8);
   }
+
+  &:disabled {
+    filter: brightness(.9);
+  }
 `;
 
-export const S_SmallColorPreview = styled.div<{
+export const S_SmallColorPreview = styled.div.attrs<{
   $color: Color;
-}>`
+}>(props => ({
+  style: {
+    backgroundColor: props.$color.css()
+  }
+}))`
   border: ${({ theme }) => theme.border};
-  background-color: ${({ $color }) => `${$color}`};
   height: 100%;
   aspect-ratio: 1;
   transition: aspect-ratio 200ms;
