@@ -1,5 +1,5 @@
 import type { Color } from "chroma-js";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { S_MainSurface } from "../../base/MainSurface";
 import { motion } from "motion/react";
 
@@ -64,24 +64,35 @@ export const S_SavedColorsList = styled.ul`
   }
 `;
 
-export const S_SavedColorItem = styled(motion.li)`
-  display: flex;
-  gap: 10px;
-  align-items: center;
-  min-height: 30px;
-  list-style: none;
-
-  &:hover {
-    background-color: ${({ theme }) => theme.colors.bg};
-
-    > :last-child {
-      aspect-ratio: 3;
-    }
+const activeStyle = css`
+  background-color: ${({ theme }) => theme.colors.bg};
+  > :last-child {
+    width: 100%;
   }
 `;
 
+export const S_SavedColorItem = styled(motion.li)<{ $isEditingThisColorItem?: boolean; }>`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  min-height: 30px;
+  list-style: none;
+
+  ${({ $isEditingThisColorItem }) => {
+    if ($isEditingThisColorItem) return activeStyle;
+    if ($isEditingThisColorItem === undefined) {
+      return css`
+        &:hover {
+          ${activeStyle}
+        }
+      `;
+    }
+    return null;
+  }}
+`;
+
 export const S_SavedColorOptions = styled.div`
-  flex: 1;
   display: flex;
   align-items: center;
   gap: 10px;
@@ -109,13 +120,18 @@ export const S_OptionsButton = styled.button`
 
 export const S_SmallColorPreview = styled.div.attrs<{
   $color: Color;
-}>(props => ({
+  $clickable?: boolean;
+}>((props) => ({
   style: {
-    backgroundColor: props.$color.css()
-  }
+    backgroundColor: props.$color.css(),
+  },
 }))`
   border: ${({ theme }) => theme.border};
+  border-radius: 5px;
   height: 100%;
-  aspect-ratio: 1;
-  transition: aspect-ratio 200ms;
+  width: 30px;
+  transition: width 300ms ease-in-out;
+
+  cursor: ${({ $clickable }) =>
+    $clickable || $clickable === undefined  ? "pointer" : "not-allowed"};
 `;

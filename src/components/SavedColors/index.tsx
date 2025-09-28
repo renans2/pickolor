@@ -2,17 +2,31 @@ import { useSelectedColor } from "../../context/SelectedColorProvider";
 import { useEffect, useRef, useState } from "react";
 import type { Color } from "chroma-js";
 import { S_Container, S_OptionsButton, S_SaveButton, S_SavedColorItem, S_SavedColorOptions, S_SavedColorsList, S_SmallColorPreview } from "./styles";
-import { Eye, Pencil, Save, Trash2 } from "lucide-react";
+import { Pencil, Save, Trash2 } from "lucide-react";
 import { useTheme } from "styled-components";
 import type { SavedColor } from "../../types/SavedColor";
 import { AnimatePresence } from "motion/react";
+
+const ICON_SETTINGS = {
+  size: 18,
+  strokeWidth: 2,
+}
 
 export default function SavedColors() {
   const { color, setColor } = useSelectedColor();
   const [savedColors, setSavedColors] = useState<SavedColor[]>([]);
   const [editingColorId, setEditingColorId] = useState<number>();
-  const { colors: { textPrimary } } = useTheme();
+  const { colors: { textPrimary: iconColor } } = useTheme();
   const ulRef = useRef<HTMLUListElement>(null);
+
+  const scrollTop = () => {
+    if (ulRef.current) {
+      ulRef.current.scroll({
+        behavior: "smooth",
+        top: 0,
+      });
+    }
+  }
 
   const handleSaveNewColor = () => {
     setSavedColors(prev => {
@@ -24,12 +38,7 @@ export default function SavedColors() {
       return copy;
     });
 
-    if (ulRef.current) {
-      ulRef.current.scroll({
-        behavior: "smooth",
-        top: 0
-      });
-    }
+    scrollTop();
   }
 
   const handleRemoveSavedColor = (id: number) => {
@@ -57,13 +66,7 @@ export default function SavedColors() {
       return copy;
     });
 
-    if (ulRef.current) {
-      ulRef.current.scroll({
-        behavior: "smooth",
-        top: 0
-      });
-    }
-
+    scrollTop();
     setEditingColorId(undefined);
   }
 
@@ -75,16 +78,17 @@ export default function SavedColors() {
     }
 
     window.addEventListener("keydown", stopEditingColor);
-
     return () => window.removeEventListener("keypress", stopEditingColor);
   }, []);
 
-  const disableOptionsButton = editingColorId !== undefined;
+  const disableButtons = editingColorId !== undefined;
+  const disableSaveNewColorButton = color.css() === savedColors[0]?.color.css();
 
   return (
     <S_Container>
       <S_SaveButton
-        disabled={disableOptionsButton}
+        title={disableSaveNewColorButton ? "You just saved this color" : ""}
+        disabled={disableButtons || disableSaveNewColorButton}
         onClick={handleSaveNewColor}
       >
         <span>Save color</span>
@@ -100,22 +104,17 @@ export default function SavedColors() {
               initial={{ scale: .5, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: .5, opacity: 0 }}
+              $isEditingThisColorItem={
+                !editingColorId ? undefined : editingColorId === savedColor.id
+              }
             >
               <S_SavedColorOptions>
                 <S_OptionsButton
-                  disabled={disableOptionsButton}
+                  disabled={disableButtons}
                   title="Delete"
                   onClick={() => handleRemoveSavedColor(savedColor.id)}
                 >
-                  <Trash2 size={18} strokeWidth={2} color={textPrimary} />
-                </S_OptionsButton>
-
-                <S_OptionsButton
-                  disabled={disableOptionsButton}
-                  title="Set as current color"
-                  onClick={() => handleSetAsCurrentColor(savedColor.color)}
-                >
-                  <Eye size={18} strokeWidth={2} color={textPrimary} />
+                  <Trash2 {...ICON_SETTINGS} color={iconColor} />
                 </S_OptionsButton>
 
                 {editingColorId === savedColor.id ? (
@@ -123,23 +122,28 @@ export default function SavedColors() {
                     title="Save"
                     onClick={() => handleSaveEditedColor()}
                   >
-                    <Save size={18} strokeWidth={2} color={textPrimary} />
+                    <Save {...ICON_SETTINGS} color={iconColor} />
                   </S_OptionsButton>
                 ) : (
                   <S_OptionsButton
-                    disabled={disableOptionsButton}
+                    disabled={disableButtons}
                     title="Edit"
                     onClick={() => handleEditColor(savedColor)}
                   >
-                    <Pencil size={18} strokeWidth={2} color={textPrimary} />
+                    <Pencil {...ICON_SETTINGS} color={iconColor} />
                   </S_OptionsButton>
                 )}
               </S_SavedColorOptions>
 
               <S_SmallColorPreview
+                $clickable={editingColorId === undefined}
                 $color={
                   editingColorId === savedColor.id ? color : savedColor.color
                 }
+                onClick={() => {
+                  if (!editingColorId)
+                    handleSetAsCurrentColor(savedColor.color);
+                }}
               />
             </S_SavedColorItem>
           ))}
