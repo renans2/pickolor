@@ -7,6 +7,7 @@ import { GlobalStyles } from "./styles/global";
 import { theme } from "./styles/theme";
 import SavedColors from "./components/SavedColors";
 import { COLOR_PICKER_RECT_HEIGHT, COLOR_PICKER_RECT_WIDTH } from "./constants/dimensions";
+import Header from "./components/Header";
 
 export default function App() {
 
@@ -14,10 +15,7 @@ export default function App() {
     <ThemeProvider theme={theme}>
       <GlobalStyles />
       <SelectedColorProvider>
-        {/* <header>
-          <p>Color picker</p>
-        </header> */}
-
+        <Header />
         <S_Container>
           <ColorPicker />
           <ColorPreview />
