@@ -1,5 +1,5 @@
 import { useSelectedColor } from "../../../context/SelectedColorProvider";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import chroma from "chroma-js";
 import { S_ColorPickerRect, S_ColorPin } from "./styles";
 
@@ -11,12 +11,12 @@ export default function ColorPickerRect() {
     hue,
   } = useSelectedColor();
   const [isDragging, setIsDragging] = useState(false);
-  const divRef = useRef<HTMLDivElement>(null);
+  const { pickerRef } = useSelectedColor();
 
   const updatePinPosition = (clientX: number, clientY: number) => {
-    if (!divRef.current) return;
+    if (!pickerRef.current) return;
 
-    const div = divRef.current.getBoundingClientRect();
+    const div = pickerRef.current.getBoundingClientRect();
     let left = clientX - div.left;
     let top = clientY - div.top;
 
@@ -61,7 +61,7 @@ export default function ColorPickerRect() {
 
   return (
     <S_ColorPickerRect 
-      ref={divRef}
+      ref={pickerRef}
       onClick={handleClick}
       onMouseDown={handleMouseDown}
       $hue={hue}

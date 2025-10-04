@@ -6,7 +6,7 @@ export const S_Header = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 25vw;
+  padding: 0 calc(50vw - (768px / 2));
   box-shadow: ${({ theme }) => theme.shadow.detailSmall};
 
   background-image: linear-gradient(to right, red, orange, magenta);
@@ -22,7 +22,7 @@ export const S_Header = styled.header`
     }
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: 767px) {
     padding: 0 25px;
   }
 `;

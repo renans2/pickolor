@@ -1,12 +1,12 @@
-import React, { createContext, useContext, useState, type Dispatch, type SetStateAction } from "react";
+import React, { createContext, useContext, useRef, useState, type Dispatch, type RefObject, type SetStateAction } from "react";
 import type { RGB } from "../types/RGB";
 import type { HSV } from "../types/HSV";
 import type { PinPosition } from "../types/PinPosition";
 import chroma, { type Color } from "chroma-js";
 import type { HEX } from "../types/HEX";
-import { COLOR_PICKER_RECT_HEIGHT, COLOR_PICKER_RECT_WIDTH } from "../constants/dimensions";
 
 type ColorContextProps = {
+  pickerRef: RefObject<HTMLDivElement | null>
   color: Color;
   setColor: Dispatch<SetStateAction<Color>>;
   rgb: RGB;
@@ -21,19 +21,22 @@ const SelectedColorContext = createContext<ColorContextProps>({} as ColorContext
 export default function SelectedColorProvider({
   children
 }: { children: React.ReactNode}) {
+  const pickerRef = useRef<HTMLDivElement | null>(null);
   const [color, setColor] = useState<Color>(chroma.rgb(255, 255, 255));
 
+  const pickerRect = pickerRef.current?.getBoundingClientRect();
   const rgb: RGB = color.rgb();
   const hex: HEX = color.hex();
   const hsv: HSV = color.hsv().map(val => Number.isNaN(val) ? 0 : val) as HSV;
   const hue = hsv[0];
   const pinPosition = {
-    left: hsv[1] * COLOR_PICKER_RECT_WIDTH,
-    top: (1 - hsv[2]) * COLOR_PICKER_RECT_HEIGHT
+    left: hsv[1] * (pickerRect?.width ?? 0),
+    top: (1 - hsv[2]) * (pickerRect?.height ?? 0),
   };
 
   return (
     <SelectedColorContext.Provider value={{
+      pickerRef,
       color,
       setColor,
       rgb,

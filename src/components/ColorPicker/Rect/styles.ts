@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { COLOR_PICKER_RECT_HEIGHT, COLOR_PICKER_RECT_WIDTH } from "../../../constants/dimensions";
+import { COLOR_PICKER_RECT_HEIGHT } from "../../../constants/dimensions";
 import type { Color } from "chroma-js";
 
 export const S_ColorPickerRect = styled.div.attrs<{
@@ -7,7 +7,7 @@ export const S_ColorPickerRect = styled.div.attrs<{
 }>(({ $hue }) => ({
   style: { backgroundColor: `hsl(${$hue}, 100%, 50%)` }
 }))`
-  width: ${COLOR_PICKER_RECT_WIDTH}px;
+  width: 100%;
   height: ${COLOR_PICKER_RECT_HEIGHT}px;
   border-radius: ${({ theme }) => `${theme.rounded.sm} ${theme.rounded.sm} 0 0`};
   position: relative;
