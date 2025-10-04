@@ -7,14 +7,12 @@ import { theme } from "./styles/theme";
 import SavedColors from "./components/SavedColors";
 import { COLOR_PICKER_RECT_HEIGHT, COLOR_PICKER_RECT_WIDTH } from "./constants/dimensions";
 import Header from "./components/Header";
-import { useEffect } from "react";
 import ColorPickerRect from "./components/ColorPickerRect";
 import ColorPickerOptions from "./components/ColorPickerOptions";
+import useMediaQuery from "./hooks/useMediaQuery";
 
 export default function App() {
-  useEffect(() => {
-    document.title = "Pickolor (Color Picker)";
-  });
+  const isDesktop = useMediaQuery("(min-width: 768px)")
 
   return (
     <ThemeProvider theme={theme}>
@@ -24,9 +22,9 @@ export default function App() {
         <S_MainContainer>
           <ColorPickerRect />
           <ColorPickerOptions />
-          <ColorPreview />
-          <Clipboard />
+          {isDesktop && <ColorPreview />}
           <SavedColors />
+          <Clipboard />
         </S_MainContainer>
       </ColorPickerProvider>
     </ThemeProvider>
@@ -34,26 +32,28 @@ export default function App() {
 }
 
 const S_MainContainer = styled.main`
+  width: 100%;
+  height: calc(100vh - 60px);
   display: grid;
-  grid-template-columns: 100%;
-  grid-template-rows: 1fr 100px 50px 100px 100px;
+  grid-template-columns: 1fr;
+  grid-template-rows: 200px auto minmax(0, 1fr) 100px;
   grid-template-areas:
     "pickerRect"
     "pickerOptions"
-    "preview"
     "savedColors"
     "clipboard";
   gap: 15px;
-  padding: 20px;
+  padding: 15px;
 
   @media (min-width: 768px) {
     width: 768px;
+    height: auto;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     grid-template-columns: ${COLOR_PICKER_RECT_WIDTH}px .5fr 1fr;
-    grid-template-rows: ${COLOR_PICKER_RECT_HEIGHT}px 100px;
+    grid-template-rows: ${COLOR_PICKER_RECT_HEIGHT}px auto;
     grid-template-areas:
       "pickerRect preview savedColors"
       "pickerOptions pickerOptions clipboard";

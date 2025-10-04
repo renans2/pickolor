@@ -7,6 +7,6 @@ export const S_ColorPickerOptionsContainer = styled(S_MainSurface)`
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-
+  gap: 20px;
   padding: 17px;
 `;

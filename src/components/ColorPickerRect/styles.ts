@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { COLOR_PICKER_RECT_HEIGHT } from "../../constants/dimensions";
 import type { Color } from "chroma-js";
 import { S_MainSurface } from "../../base/MainSurface";
 
@@ -14,7 +13,7 @@ export const S_ColorPickerRect = styled(S_MainSurface).attrs<{
 }))`
   grid-area: pickerRect;
   width: 100%;
-  height: ${COLOR_PICKER_RECT_HEIGHT}px;
+  height: 100%;
   border-radius: ${({ theme }) => theme.rounded.sm};
   position: relative;
 

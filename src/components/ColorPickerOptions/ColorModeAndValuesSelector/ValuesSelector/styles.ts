@@ -5,7 +5,7 @@ export const S_RgbInput = styled.input.attrs({
   min: 0,
   max: 255,
 })`
-  /* width: 50px; */
+  width: 50px;
 `;
 
 export const S_HsvInput = styled.input.attrs({

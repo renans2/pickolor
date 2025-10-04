@@ -1,6 +1,11 @@
 import styled from "styled-components";
+import type { HEX } from "../../types/HEX";
 
-export const S_Header = styled.header`
+export const S_Header = styled.header.attrs<{ 
+  $color: HEX 
+}>((props) => ({
+  style: { backgroundImage: `linear-gradient(to right, ${props.$color}, black, ${props.$color})`}
+}))`
   width: 100%;
   height: 60px;
   display: flex;
@@ -9,7 +14,6 @@ export const S_Header = styled.header`
   padding: 0 calc(50vw - (768px / 2));
   box-shadow: ${({ theme }) => theme.shadow.detailSmall};
 
-  background-image: linear-gradient(to right, red, orange, magenta);
   background-size: 200% 100%;
   background-position: left top;
   transition: background-position 300ms ease-in-out;
@@ -28,7 +32,10 @@ export const S_Header = styled.header`
 `;
 
 export const S_Title = styled.h1`
+  font-family: "Cookie", cursive;
+  font-size: 3rem;
   font-weight: 1000;
+  font-style: normal;
   text-shadow: 1px 1px 2px #000000bb;
   color: white;
   transition: text-shadow 300ms ease-in-out;

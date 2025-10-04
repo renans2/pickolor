@@ -5,6 +5,7 @@ export const S_Container = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
   gap: 10px;
 `;
 
@@ -18,18 +19,26 @@ export const S_Select = styled.select`
 `;
 
 export const S_ValuesSelectorContainer = styled.div`
-  border: ${({ theme }) => theme.border};
   border-radius: ${({ theme }) => theme.rounded.sm};
 
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  gap: 10px;
   flex: 1;
-  padding: 5px 10px;
 
   & > label {
     color: ${({ theme }) => theme.colors.textPrimary};
-    width: fit-content;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+
+    > input {
+      padding: 5px;
+      background-color: ${({ theme }) => theme.colors.bg};
+      border: ${({ theme }) => theme.border};
+    }
   }
 
   & input {
