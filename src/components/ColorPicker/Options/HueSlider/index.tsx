@@ -1,9 +1,9 @@
-import { useSelectedColor } from "../../../../context/SelectedColorProvider";
+import { useColorPicker } from "../../../../context/ColorPickerProvider";
 import type React from "react";
 import { S_HueSlider } from "./styles";
 
 export default function HueSlider() {
-  const { hue, color, setColor } = useSelectedColor();
+  const { hue, color, setColor } = useColorPicker();
 
   const handleHueChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newColor = color.set("hsl.h", parseInt(e.target.value));

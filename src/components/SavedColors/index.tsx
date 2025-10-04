@@ -1,4 +1,4 @@
-import { useSelectedColor } from "../../context/SelectedColorProvider";
+import { useColorPicker } from "../../context/ColorPickerProvider";
 import { useEffect, useRef, useState } from "react";
 import type { Color } from "chroma-js";
 import {
@@ -21,7 +21,7 @@ const ICON_SETTINGS = {
 };
 
 export default function SavedColors() {
-  const { color, setColor } = useSelectedColor();
+  const { color, setColor } = useColorPicker();
   const [savedColors, setSavedColors] = useState<SavedColor[]>([]);
   const [editingColorId, setEditingColorId] = useState<number>();
   const { colors: { textPrimary: iconColor } } = useTheme();

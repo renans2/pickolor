@@ -1,4 +1,4 @@
-import { useSelectedColor } from "../../../context/SelectedColorProvider";
+import { useColorPicker } from "../../../context/ColorPickerProvider";
 import { useEffect, useState } from "react";
 import chroma from "chroma-js";
 import { S_ColorPickerRect, S_ColorPin } from "./styles";
@@ -9,9 +9,9 @@ export default function ColorPickerRect() {
     color,
     setColor,
     hue,
-  } = useSelectedColor();
+  } = useColorPicker();
   const [isDragging, setIsDragging] = useState(false);
-  const { pickerRef } = useSelectedColor();
+  const { pickerRef } = useColorPicker();
 
   const updatePinPosition = (clientX: number, clientY: number) => {
     if (!pickerRef.current) return;

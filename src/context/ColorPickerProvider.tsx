@@ -5,7 +5,7 @@ import type { PinPosition } from "../types/PinPosition";
 import chroma, { type Color } from "chroma-js";
 import type { HEX } from "../types/HEX";
 
-type ColorContextProps = {
+type ColorPickerContextType = {
   pickerRef: RefObject<HTMLDivElement | null>
   color: Color;
   setColor: Dispatch<SetStateAction<Color>>;
@@ -16,7 +16,7 @@ type ColorContextProps = {
   pinPosition: PinPosition;
 }
 
-const SelectedColorContext = createContext<ColorContextProps>({} as ColorContextProps);
+const ColorPickerContext = createContext<ColorPickerContextType>({} as ColorPickerContextType);
 
 export default function SelectedColorProvider({
   children
@@ -35,7 +35,7 @@ export default function SelectedColorProvider({
   };
 
   return (
-    <SelectedColorContext.Provider value={{
+    <ColorPickerContext.Provider value={{
       pickerRef,
       color,
       setColor,
@@ -46,12 +46,12 @@ export default function SelectedColorProvider({
       pinPosition,
     }}>
       {children}
-    </SelectedColorContext.Provider>
+    </ColorPickerContext.Provider>
   );
 }
 
-export const useSelectedColor = () => {
-  const context = useContext(SelectedColorContext);
+export const useColorPicker = () => {
+  const context = useContext(ColorPickerContext);
 
   if (!context)
     throw new Error("The hook must be used within the context provider");

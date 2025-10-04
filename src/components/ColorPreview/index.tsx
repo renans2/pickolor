@@ -1,8 +1,8 @@
-import { useSelectedColor } from "../../context/SelectedColorProvider";
+import { useColorPicker } from "../../context/ColorPickerProvider";
 import { S_ColorPreview } from "./styles";
 
 export default function ColorPreview() {
-  const { color } = useSelectedColor();
+  const { color } = useColorPicker();
 
   return (
     <S_ColorPreview 

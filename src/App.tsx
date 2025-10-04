@@ -1,7 +1,7 @@
 import styled, { ThemeProvider } from "styled-components";
 import ColorPicker from "./components/ColorPicker";
 import ColorPreview from "./components/ColorPreview";
-import SelectedColorProvider from "./context/SelectedColorProvider";
+import ColorPickerProvider from "./context/ColorPickerProvider";
 import Clipboard from "./components/Clipboard";
 import { GlobalStyles } from "./styles/global";
 import { theme } from "./styles/theme";
@@ -14,7 +14,7 @@ export default function App() {
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyles />
-      <SelectedColorProvider>
+      <ColorPickerProvider>
         <Header />
         <S_Container>
           <ColorPicker />
@@ -22,7 +22,7 @@ export default function App() {
           <Clipboard />
           <SavedColors />
         </S_Container>
-      </SelectedColorProvider>
+      </ColorPickerProvider>
     </ThemeProvider>
   )
 }

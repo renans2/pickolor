@@ -1,10 +1,10 @@
-import { useSelectedColor } from "../../../../../context/SelectedColorProvider";
+import { useColorPicker } from "../../../../../context/ColorPickerProvider";
 import chroma from "chroma-js";
 import { useEffect, useState } from "react";
 import { S_Error, S_HexInput, S_HsvInput, S_RgbInput } from "./styles";
 
 export function RgbSelector() {
-  const { rgb, color, setColor } = useSelectedColor();
+  const { rgb, color, setColor } = useColorPicker();
 
   const handleChangeRgbChannel = (
     e: React.ChangeEvent<HTMLInputElement>, 
@@ -47,7 +47,7 @@ export function RgbSelector() {
 }
 
 export function HsvSelector() {
-  const { hsv, color, setColor } = useSelectedColor();
+  const { hsv, color, setColor } = useColorPicker();
 
   const handleChangeHsvChannel = (
     e: React.ChangeEvent<HTMLInputElement>, 
@@ -97,7 +97,7 @@ export function HsvSelector() {
 const HEX6 = /^#[0-9A-Fa-f]{6}$/;
 
 export function HexSelector() {
-  const { hex, setColor } = useSelectedColor();
+  const { hex, setColor } = useColorPicker();
   const [hexInput, setHexInput] = useState(hex);
   const [invalid, setInvalid] = useState(false);
 
