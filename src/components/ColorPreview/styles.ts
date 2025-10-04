@@ -9,8 +9,8 @@ export const S_ColorPreview = styled(S_MainSurface).attrs<{
     backgroundColor: props.$color.css(),
   }
 }))`
+  grid-area: preview;
   position: relative;
   width: 100%;
   height: 100%;
-  grid-area: preview;
 `;

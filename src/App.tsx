@@ -47,7 +47,7 @@ const S_MainContainer = styled.main`
   padding: 20px;
 
   @media (min-width: 768px) {
-    width: clamp(768px, 50vw, 850px);
+    width: 768px;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -56,7 +56,7 @@ const S_MainContainer = styled.main`
     grid-template-rows: ${COLOR_PICKER_RECT_HEIGHT}px 100px;
     grid-template-areas:
       "pickerRect preview savedColors"
-      "pickerOptions clipboard clipboard";
+      "pickerOptions pickerOptions clipboard";
     padding: 0;
   }
 `;

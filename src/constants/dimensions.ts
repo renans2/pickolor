@@ -1,2 +1,2 @@
-export const COLOR_PICKER_RECT_WIDTH = 430;
+export const COLOR_PICKER_RECT_WIDTH = 375;
 export const COLOR_PICKER_RECT_HEIGHT = 300;
