@@ -1,6 +1,6 @@
-import type { Color } from "chroma-js";
+import type { HEX } from "./HEX";
 
 export type SavedColor = {
-  color: Color;
+  color: HEX;
   id: number;
 }

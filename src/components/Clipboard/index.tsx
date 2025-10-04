@@ -3,12 +3,13 @@ import { useColorPicker } from "../../context/ColorPickerProvider";
 import { S_Container, S_Select, S_SelectedColorModeToCopy } from "./styles";
 import type { ColorMode } from "../../types/ColorMode";
 import { Check, Copy } from "lucide-react";
+import useLocalStorage from "../../hooks/useLocalStorage";
 
 type ClipboardColorMode = Exclude<ColorMode, "HSV"> | "HSL";
 
 export default function Clipboard() {
   const { color } = useColorPicker();
-  const [colorMode, setColorMode] = useState<ClipboardColorMode>("RGB");
+  const [colorMode, setColorMode] = useLocalStorage<ClipboardColorMode>("colorModeClipboard", "RGB");
   const [copied, setCopied] = useState(false);
 
   const toCopy = colorMode === "HEX" 

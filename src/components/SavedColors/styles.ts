@@ -2,6 +2,7 @@ import type { Color } from "chroma-js";
 import styled, { css } from "styled-components";
 import { S_MainSurface } from "../../base/MainSurface";
 import { motion } from "motion/react";
+import type { HEX } from "../../types/HEX";
 
 export const S_Container = styled(S_MainSurface)`
   padding: 10px;
@@ -121,11 +122,11 @@ export const S_OptionsButton = styled.button`
 `;
 
 export const S_SmallColorPreview = styled.div.attrs<{
-  $color: Color;
+  $color: HEX;
   $clickable?: boolean;
 }>((props) => ({
   style: {
-    backgroundColor: props.$color.css(),
+    backgroundColor: props.$color,
   },
 }))`
   border: ${({ theme }) => theme.border};

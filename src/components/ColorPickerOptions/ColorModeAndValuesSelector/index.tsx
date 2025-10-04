@@ -1,10 +1,10 @@
-import { useState } from "react";
 import type { ColorMode } from "../../../types/ColorMode";
 import { HexSelector, HsvSelector, RgbSelector } from "./ValuesSelector";
 import { S_Container, S_Select, S_ValuesSelectorContainer } from "./styles";
+import useLocalStorage from "../../../hooks/useLocalStorage";
 
 export default function ColorModeAndValuesSelector() {
-  const [colorMode, setColorMode] = useState<ColorMode>("RGB");
+  const [colorMode, setColorMode] = useLocalStorage<ColorMode>("colorMode", "RGB");
   
   return (
     <S_Container>

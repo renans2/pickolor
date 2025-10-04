@@ -25,6 +25,7 @@ export const S_SelectedColorModeToCopy = styled.div<{ $copied: boolean }>`
   font-size: 0.9rem;
   padding: 7px;
   border-radius: 10px;
+  font-weight: 500;
 
   cursor: ${({ $copied }) => $copied ? "default" : "pointer"};
 

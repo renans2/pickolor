@@ -1,6 +1,6 @@
 import { useColorPicker } from "../../context/ColorPickerProvider";
 import { useEffect, useRef, useState } from "react";
-import type { Color } from "chroma-js";
+import chroma, { type Color } from "chroma-js";
 import {
   S_Container,
   S_NoColorsSaved,
@@ -15,6 +15,7 @@ import { Check, Pencil, Trash2, X } from "lucide-react";
 import { useTheme } from "styled-components";
 import type { SavedColor } from "../../types/SavedColor";
 import { AnimatePresence } from "motion/react";
+import useLocalStorage from "../../hooks/useLocalStorage";
 
 const ICON_SETTINGS = {
   size: 18,
@@ -23,7 +24,7 @@ const ICON_SETTINGS = {
 
 export default function SavedColors() {
   const { color, setColor } = useColorPicker();
-  const [savedColors, setSavedColors] = useState<SavedColor[]>([]);
+  const [savedColors, setSavedColors] = useLocalStorage<SavedColor[]>("savedColors", []);
   const [editingColorId, setEditingColorId] = useState<number>();
   const { colors: { textPrimary: iconColor } } = useTheme();
   const ulRef = useRef<HTMLUListElement>(null);
@@ -43,7 +44,7 @@ export default function SavedColors() {
     setSavedColors((prev) => {
       const copy = [...prev];
       copy.unshift({
-        color,
+        color: color.hex(),
         id: Math.floor(performance.now()),
       });
       return copy;
@@ -61,7 +62,7 @@ export default function SavedColors() {
   };
 
   const handleEditColor = (savedColor: SavedColor) => {
-    setColor(savedColor.color);
+    setColor(chroma(savedColor.color));
     setEditingColorId(savedColor.id);
   };
 
@@ -72,7 +73,7 @@ export default function SavedColors() {
       );
 
       copy.unshift({
-        color,
+        color: color.hex(),
         id: editingColorId!,
       });
 
@@ -164,11 +165,11 @@ export default function SavedColors() {
                 <S_SmallColorPreview
                   $clickable={editingColorId === undefined}
                   $color={
-                    editingColorId === savedColor.id ? color : savedColor.color
+                    editingColorId === savedColor.id ? color.hex() : savedColor.color
                   }
                   onClick={() => {
                     if (!editingColorId)
-                      handleSetAsCurrentColor(savedColor.color);
+                      handleSetAsCurrentColor(chroma(savedColor.color));
                   }}
                 />
               </S_SavedColorItem>
