@@ -19,7 +19,7 @@ export const S_SaveButton = styled.button`
   align-items: center;
   gap: 10px;
   border: ${({ theme }) => theme.border};
-  border-radius: ${({ theme }) => theme.rounded.xl};
+  border-radius: ${({ theme }) => theme.rounded.sm};
   padding: 7px 7px;
   font-weight: 600;
   font-size: 1rem;

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import type { ColorMode } from "../../../../types/ColorMode";
+import type { ColorMode } from "../../../types/ColorMode";
 import { HexSelector, HsvSelector, RgbSelector } from "./ValuesSelector";
 import { S_Container, S_Select, S_ValuesSelectorContainer } from "./styles";
 

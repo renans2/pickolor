@@ -1,4 +1,4 @@
-import { useColorPicker } from "../../../../context/ColorPickerProvider";
+import { useColorPicker } from "../../../context/ColorPickerProvider";
 import type React from "react";
 import { S_HueSlider } from "./styles";
 

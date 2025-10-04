@@ -1,5 +1,4 @@
 import styled, { ThemeProvider } from "styled-components";
-import ColorPicker from "./components/ColorPicker";
 import ColorPreview from "./components/ColorPreview";
 import ColorPickerProvider from "./context/ColorPickerProvider";
 import Clipboard from "./components/Clipboard";
@@ -9,6 +8,8 @@ import SavedColors from "./components/SavedColors";
 import { COLOR_PICKER_RECT_HEIGHT, COLOR_PICKER_RECT_WIDTH } from "./constants/dimensions";
 import Header from "./components/Header";
 import { useEffect } from "react";
+import ColorPickerRect from "./components/ColorPickerRect";
+import ColorPickerOptions from "./components/ColorPickerOptions";
 
 export default function App() {
   useEffect(() => {
@@ -20,23 +21,25 @@ export default function App() {
       <GlobalStyles />
       <ColorPickerProvider>
         <Header />
-        <S_Container>
-          <ColorPicker />
+        <S_MainContainer>
+          <ColorPickerRect />
+          <ColorPickerOptions />
           <ColorPreview />
           <Clipboard />
           <SavedColors />
-        </S_Container>
+        </S_MainContainer>
       </ColorPickerProvider>
     </ThemeProvider>
   )
 }
 
-const S_Container = styled.main`
+const S_MainContainer = styled.main`
   display: grid;
   grid-template-columns: 100%;
-  grid-template-rows: 1fr 50px 100px 100px;
+  grid-template-rows: 1fr 100px 50px 100px 100px;
   grid-template-areas:
-    "picker"
+    "pickerRect"
+    "pickerOptions"
     "preview"
     "savedColors"
     "clipboard";
@@ -52,8 +55,8 @@ const S_Container = styled.main`
     grid-template-columns: ${COLOR_PICKER_RECT_WIDTH}px .5fr 1fr;
     grid-template-rows: ${COLOR_PICKER_RECT_HEIGHT}px 100px;
     grid-template-areas:
-      "picker preview savedColors"
-      "picker clipboard clipboard";
+      "pickerRect preview savedColors"
+      "pickerOptions clipboard clipboard";
     padding: 0;
   }
 `;

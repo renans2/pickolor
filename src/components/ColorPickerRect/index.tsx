@@ -1,4 +1,4 @@
-import { useColorPicker } from "../../../context/ColorPickerProvider";
+import { useColorPicker } from "../../context/ColorPickerProvider";
 import { useEffect, useState } from "react";
 import chroma from "chroma-js";
 import { S_ColorPickerRect, S_ColorPin } from "./styles";

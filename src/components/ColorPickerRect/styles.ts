@@ -1,30 +1,31 @@
 import styled from "styled-components";
-import { COLOR_PICKER_RECT_HEIGHT } from "../../../constants/dimensions";
+import { COLOR_PICKER_RECT_HEIGHT } from "../../constants/dimensions";
 import type { Color } from "chroma-js";
+import { S_MainSurface } from "../../base/MainSurface";
 
-export const S_ColorPickerRect = styled.div.attrs<{
+export const S_ColorPickerRect = styled(S_MainSurface).attrs<{
   $hue: number
 }>(({ $hue }) => ({
   style: { backgroundColor: `hsl(${$hue}, 100%, 50%)` }
 }))`
+  grid-area: pickerRect;
   width: 100%;
   height: ${COLOR_PICKER_RECT_HEIGHT}px;
-  border-radius: ${({ theme }) => `${theme.rounded.sm} ${theme.rounded.sm} 0 0`};
+  border-radius: ${({ theme }) => theme.rounded.sm};
   position: relative;
 
-  &::before {
+  &::before, &::after {
     content: "";
-    border-radius: ${({ theme }) => `${theme.rounded.sm} ${theme.rounded.sm} 0 0`};
+    border-radius: ${({ theme }) => theme.rounded.sm};
     position: absolute;
     inset: 0;
+  }
+
+  &::before {
     background: linear-gradient(to right, white, transparent);
   }
 
   &::after {
-    content: "";
-    border-radius: ${({ theme }) => `${theme.rounded.sm} ${theme.rounded.sm} 0 0`};
-    position: absolute;
-    inset: 0;
     background: linear-gradient(to top, black, transparent);
   }
 `;
