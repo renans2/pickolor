@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import type { Color } from "chroma-js";
 import {
   S_Container,
+  S_NoColorsSaved,
   S_OptionsButton,
   S_SaveButton,
   S_SavedColorItem,
@@ -10,7 +11,7 @@ import {
   S_SavedColorsList,
   S_SmallColorPreview,
 } from "./styles";
-import { Pencil, Save, Trash2 } from "lucide-react";
+import { Check, Pencil, Trash2, X } from "lucide-react";
 import { useTheme } from "styled-components";
 import type { SavedColor } from "../../types/SavedColor";
 import { AnimatePresence } from "motion/react";
@@ -37,6 +38,8 @@ export default function SavedColors() {
   };
 
   const handleSaveNewColor = () => {
+    setEditingColorId(undefined);
+
     setSavedColors((prev) => {
       const copy = [...prev];
       copy.unshift({
@@ -92,73 +95,88 @@ export default function SavedColors() {
   }, []);
 
   const disableButtons = editingColorId !== undefined;
-  const disableSaveNewColorButton = color.css() === savedColors[0]?.color.css();
 
   return (
     <S_Container>
       <S_SaveButton
-        title={disableSaveNewColorButton ? "You just saved this color" : ""}
-        disabled={disableButtons || disableSaveNewColorButton}
+        $color={color}
         onClick={handleSaveNewColor}
       >
-        <span>Save color</span>
-        <S_SmallColorPreview $color={color} />
+        Save color
       </S_SaveButton>
 
-      <S_SavedColorsList ref={ulRef}>
-        <AnimatePresence mode="popLayout">
-          {savedColors.map((savedColor) => (
-            <S_SavedColorItem
-              key={savedColor.id}
-              layout
-              initial={{ scale: 0.5, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.5, opacity: 0 }}
-              $isEditingThisColorItem={
-                !editingColorId ? undefined : editingColorId === savedColor.id
-              }
-            >
-              <S_SavedColorOptions>
-                <S_OptionsButton
-                  disabled={disableButtons}
-                  title="Delete"
-                  onClick={() => handleRemoveSavedColor(savedColor.id)}
-                >
-                  <Trash2 {...ICON_SETTINGS} color={iconColor} />
-                </S_OptionsButton>
-
-                {editingColorId === savedColor.id ? (
-                  <S_OptionsButton
-                    title="Save"
-                    onClick={() => handleSaveEditedColor()}
-                  >
-                    <Save {...ICON_SETTINGS} color={iconColor} />
-                  </S_OptionsButton>
-                ) : (
-                  <S_OptionsButton
-                    disabled={disableButtons}
-                    title="Edit"
-                    onClick={() => handleEditColor(savedColor)}
-                  >
-                    <Pencil {...ICON_SETTINGS} color={iconColor} />
-                  </S_OptionsButton>
-                )}
-              </S_SavedColorOptions>
-
-              <S_SmallColorPreview
-                $clickable={editingColorId === undefined}
-                $color={
-                  editingColorId === savedColor.id ? color : savedColor.color
+      {savedColors.length === 0 ? (
+        <S_NoColorsSaved>
+          Empty!
+        </S_NoColorsSaved>
+      ) : (
+        <S_SavedColorsList ref={ulRef}>
+          <AnimatePresence mode="popLayout">
+            {savedColors.map((savedColor) => (
+              <S_SavedColorItem
+                key={savedColor.id}
+                layout
+                initial={{ scale: 0.5, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                exit={{ scale: 0.5, opacity: 0 }}
+                $isEditingThisColorItem={
+                  !editingColorId ? undefined : editingColorId === savedColor.id
                 }
-                onClick={() => {
-                  if (!editingColorId)
-                    handleSetAsCurrentColor(savedColor.color);
-                }}
-              />
-            </S_SavedColorItem>
-          ))}
-        </AnimatePresence>
-      </S_SavedColorsList>
+              >
+                <S_SavedColorOptions>
+                  {editingColorId === savedColor.id ? (
+                    <>
+                      <S_OptionsButton
+                        title="Cancel"
+                        onClick={() => setEditingColorId(undefined)}
+                      >
+                        <X {...ICON_SETTINGS} color={iconColor} />
+                      </S_OptionsButton>
+
+                      <S_OptionsButton
+                        title="Save"
+                        onClick={() => handleSaveEditedColor()}
+                      >
+                        <Check {...ICON_SETTINGS} color={iconColor} />
+                      </S_OptionsButton>
+                    </>
+                  ) : (
+                    <>
+                      <S_OptionsButton
+                        disabled={disableButtons}
+                        title="Delete"
+                        onClick={() => handleRemoveSavedColor(savedColor.id)}
+                      >
+                        <Trash2 {...ICON_SETTINGS} color={iconColor} />
+                      </S_OptionsButton>
+
+                      <S_OptionsButton
+                        disabled={disableButtons}
+                        title="Edit"
+                        onClick={() => handleEditColor(savedColor)}
+                      >
+                        <Pencil {...ICON_SETTINGS} color={iconColor} />
+                      </S_OptionsButton>
+                    </>
+                  )}
+                </S_SavedColorOptions>
+
+                <S_SmallColorPreview
+                  $clickable={editingColorId === undefined}
+                  $color={
+                    editingColorId === savedColor.id ? color : savedColor.color
+                  }
+                  onClick={() => {
+                    if (!editingColorId)
+                      handleSetAsCurrentColor(savedColor.color);
+                  }}
+                />
+              </S_SavedColorItem>
+            ))}
+          </AnimatePresence>
+        </S_SavedColorsList>
+      )}
+
     </S_Container>
   );
 }

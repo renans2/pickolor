@@ -4,9 +4,13 @@ import type { Color } from "chroma-js";
 import { S_MainSurface } from "../../base/MainSurface";
 
 export const S_ColorPickerRect = styled(S_MainSurface).attrs<{
-  $hue: number
-}>(({ $hue }) => ({
-  style: { backgroundColor: `hsl(${$hue}, 100%, 50%)` }
+  $hue: number;
+  $isDragging: boolean;
+}>((props) => ({
+  style: { 
+    backgroundColor: `hsl(${props.$hue}, 100%, 50%)`,
+    cursor: props.$isDragging ? "grabbing" : "grab",
+  }
 }))`
   grid-area: pickerRect;
   width: 100%;

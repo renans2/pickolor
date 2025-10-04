@@ -8,7 +8,7 @@ export const theme: DefaultTheme = {
     detailSmall: "1px 1px 3px rgba(0, 0, 0, 0.15)",
   },
   rounded: {
-    xs: "5px",
+    xs: "7px",
     sm: "10px",
     xl: "15px",
   },

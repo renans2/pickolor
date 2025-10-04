@@ -65,6 +65,7 @@ export default function ColorPickerRect() {
       onClick={handleClick}
       onMouseDown={handleMouseDown}
       $hue={hue}
+      $isDragging={isDragging}
     >
       <S_ColorPin 
         $left={left}

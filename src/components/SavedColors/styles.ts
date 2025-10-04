@@ -13,19 +13,26 @@ export const S_Container = styled(S_MainSurface)`
   grid-area: savedColors;
 `;
 
-export const S_SaveButton = styled.button`
+export const S_SaveButton = styled.button.attrs<{
+  $color: Color;
+}>((props) => ({
+  style: {
+    backgroundColor: props.$color.css()
+  },
+}))`
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 10px;
   border: ${({ theme }) => theme.border};
-  border-radius: ${({ theme }) => theme.rounded.sm};
-  padding: 7px 7px;
+  border-radius: ${({ theme }) => theme.rounded.xs};
+  padding: 10px 7px;
   font-weight: 600;
   font-size: 1rem;
   transition: transform 100ms;
   background-color: white;
-  color: ${({ theme }) => theme.colors.textAccent};
+  text-shadow: 0 0 2px black, 0 0 2px black, 0 0 2px black;
+  color: white;
 
   &:hover {
     transform: scale(1.03);
@@ -34,23 +41,14 @@ export const S_SaveButton = styled.button`
   &:active {
     transform: scale(0.95);
   }
-
-  &:disabled {
-    transform: scale(1);
-    filter: brightness(.9);
-
-    > :last-child {
-      display: none;
-    }
-  }
 `;
 
 export const S_SavedColorsList = styled.ul`
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: 100%;
-  gap: 4px;
+  flex: 1;
+  gap: 3px;
   overflow-y: auto;
   overflow-x: hidden;
 
@@ -61,6 +59,10 @@ export const S_SavedColorsList = styled.ul`
 
   &::-webkit-scrollbar-thumb {
     background-color: rgba(0, 0, 0, .3);
+  }
+
+  > :last-child {
+    margin-bottom: 2px;
   }
 `;
 
@@ -110,7 +112,7 @@ export const S_OptionsButton = styled.button`
   border: 1px solid #0000001f;
 
   &:hover {
-    filter: brightness(.8);
+    filter: brightness(.85);
   }
 
   &:disabled {
@@ -132,6 +134,26 @@ export const S_SmallColorPreview = styled.div.attrs<{
   width: 30px;
   transition: width 300ms ease-in-out;
 
+  ${({ $clickable }) => $clickable && css`
+    &:hover {
+      border-width: 2px;
+      border-color: black;
+    }
+  `}
+
   cursor: ${({ $clickable }) =>
     $clickable || $clickable === undefined  ? "pointer" : "not-allowed"};
+
+  @media (max-width: 768px) {
+    width: 100%;
+  }
+`;
+
+export const S_NoColorsSaved = styled.p`
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: ${({ theme }) => theme.colors.textPrimary};
 `;

@@ -22,7 +22,7 @@ export default function SelectedColorProvider({
   children
 }: { children: React.ReactNode}) {
   const pickerRef = useRef<HTMLDivElement | null>(null);
-  const [color, setColor] = useState<Color>(chroma.rgb(255, 255, 255));
+  const [color, setColor] = useState<Color>(chroma.rgb(255, 254, 254));
 
   const pickerRect = pickerRef.current?.getBoundingClientRect();
   const rgb: RGB = color.rgb();

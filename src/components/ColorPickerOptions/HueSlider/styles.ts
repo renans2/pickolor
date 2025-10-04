@@ -3,6 +3,11 @@ import styled from "styled-components";
 export const S_HueSlider = styled.input`
   width: 100%;
   appearance: none;
+  cursor: grab;
+
+  &:active {
+    cursor: grabbing;
+  }
 
   &::-webkit-slider-runnable-track {
     box-shadow: ${({ theme }) => theme.shadow.detail};
