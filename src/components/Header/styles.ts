@@ -1,20 +1,18 @@
 import styled from "styled-components";
 
 export const S_Header = styled.header`
-  position: fixed;
-  top: 0;
   width: 100%;
   height: 60px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 25%;
+  padding: 0 25vw;
   box-shadow: ${({ theme }) => theme.shadow.detailSmall};
 
   background-image: linear-gradient(to right, red, orange, magenta);
   background-size: 200% 100%;
   background-position: left top;
-  transition: background-position 400ms ease-in-out;
+  transition: background-position 300ms ease-in-out;
 
   &:hover {
     background-position: right top;

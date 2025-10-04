@@ -27,7 +27,11 @@ export default function App() {
   )
 }
 
-const S_Container = styled.div`
+const S_Container = styled.main`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   display: grid;
   grid-template-columns: ${COLOR_PICKER_RECT_WIDTH}px 150px 250px;
   grid-template-rows: ${COLOR_PICKER_RECT_HEIGHT}px 100px;
@@ -35,4 +39,16 @@ const S_Container = styled.div`
     "picker preview savedColors"
     "picker clipboard clipboard";
   gap: 15px;
+
+  @media (max-width: 768px) {
+    position: relative;
+    grid-template-columns: 100%;
+    grid-template-rows: 1fr 100px 100px 100px;
+    grid-template-areas:
+      "picker"
+      "preview"
+      "savedColors"
+      "clipboard";
+    padding: 20px;
+  }
 `;
