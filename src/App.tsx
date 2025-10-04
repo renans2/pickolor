@@ -8,8 +8,12 @@ import { theme } from "./styles/theme";
 import SavedColors from "./components/SavedColors";
 import { COLOR_PICKER_RECT_HEIGHT, COLOR_PICKER_RECT_WIDTH } from "./constants/dimensions";
 import Header from "./components/Header";
+import { useEffect } from "react";
 
 export default function App() {
+  useEffect(() => {
+    document.title = "Pickolor (Color Picker)";
+  });
 
   return (
     <ThemeProvider theme={theme}>
