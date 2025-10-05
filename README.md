@@ -15,7 +15,7 @@ A simple color picker built with **Vite**, **React**, **styled-components** and 
 
 ```bash
 # 1. Clone the repository
-git clone https://github.com/...
+git clone https://github.com/renans2/pickolor.git
 cd pickolor
 
 # 2. Install dependencies
