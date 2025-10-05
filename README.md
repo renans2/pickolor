@@ -1,6 +1,6 @@
 # Pickolor 🖌️
 
-A simple color picker built with React and styled-components.
+A simple color picker built with Vite, React and styled-components.
 
 ## Features
 
