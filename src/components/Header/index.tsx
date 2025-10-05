@@ -5,7 +5,7 @@ export default function Header() {
   return (
     <S_Header>
       <S_Title>Pickolor</S_Title>
-      <S_RepoButton href="https://www.google.com" target="_blank">
+      <S_RepoButton href="https://github.com/renans2/pickolor" target="_blank">
         <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg" />
         <span>Github Repo</span>
         <SquareArrowOutUpRight size={18} strokeWidth={2.5} />
