@@ -1,6 +1,6 @@
 # Pickolor 🖌️
 
-A simple color picker built with Vite, React and styled-components.
+A simple color picker built with **Vite**, **React**, **styled-components** and **[chroma.js](https://github.com/gka/chroma.js)**.
 
 ## Features
 
