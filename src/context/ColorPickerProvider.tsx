@@ -1,9 +1,10 @@
 import React, { createContext, useContext, useRef, useState, type Dispatch, type RefObject, type SetStateAction } from "react";
 import type { RGB } from "../types/RGB";
-import type { HSV } from "../types/HSV";
+import type { HSL } from "../types/HSL";
 import type { PinPosition } from "../types/PinPosition";
 import chroma, { type Color } from "chroma-js";
 import type { HEX } from "../types/HEX";
+import type { HSV } from "../types/HSV";
 
 type ColorPickerContextType = {
   pickerRef: RefObject<HTMLDivElement | null>
@@ -11,7 +12,7 @@ type ColorPickerContextType = {
   setColor: Dispatch<SetStateAction<Color>>;
   rgb: RGB;
   hex: HEX;
-  hsv: HSV;
+  hsl: HSL;
   hue: number;
   pinPosition: PinPosition;
 }
@@ -27,6 +28,7 @@ export default function SelectedColorProvider({
   const pickerRect = pickerRef.current?.getBoundingClientRect();
   const rgb: RGB = color.rgb();
   const hex: HEX = color.hex();
+  const hsl: HSL = color.hsl().map(val => Number.isNaN(val) ? 0 : val) as HSL;
   const hsv: HSV = color.hsv().map(val => Number.isNaN(val) ? 0 : val) as HSV;
   const hue = hsv[0];
   const pinPosition = {
@@ -41,7 +43,7 @@ export default function SelectedColorProvider({
       setColor,
       rgb,
       hex,
-      hsv,
+      hsl,
       hue,
       pinPosition,
     }}>

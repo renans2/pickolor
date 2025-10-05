@@ -1,12 +1,9 @@
 import { SquareArrowOutUpRight } from "lucide-react";
 import { S_Header, S_RepoButton, S_Title } from "./styles";
-import { useColorPicker } from "../../context/ColorPickerProvider";
 
 export default function Header() {
-  const { color } = useColorPicker();
-
   return (
-    <S_Header $color={color.hex()}>
+    <S_Header>
       <S_Title>Pickolor</S_Title>
       <S_RepoButton href="https://www.google.com" target="_blank">
         <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg" />

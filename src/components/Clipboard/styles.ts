@@ -22,7 +22,7 @@ export const S_SelectedColorModeToCopy = styled.div<{ $copied: boolean }>`
   justify-content: space-between;
   align-items: center;
   color: ${({ theme }) => theme.colors.textPrimary};
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   padding: 7px;
   border-radius: 10px;
   font-weight: 500;

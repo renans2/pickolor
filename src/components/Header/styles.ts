@@ -1,11 +1,6 @@
 import styled from "styled-components";
-import type { HEX } from "../../types/HEX";
 
-export const S_Header = styled.header.attrs<{ 
-  $color: HEX 
-}>((props) => ({
-  style: { backgroundImage: `linear-gradient(to right, ${props.$color}, black, ${props.$color})`}
-}))`
+export const S_Header = styled.header`
   width: 100%;
   height: 60px;
   display: flex;
@@ -14,6 +9,7 @@ export const S_Header = styled.header.attrs<{
   padding: 0 calc(50vw - (768px / 2));
   box-shadow: ${({ theme }) => theme.shadow.detailSmall};
 
+  background-image: linear-gradient(to right, red, orange, magenta);
   background-size: 200% 100%;
   background-position: left top;
   transition: background-position 300ms ease-in-out;

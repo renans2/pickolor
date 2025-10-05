@@ -1,24 +1,17 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
-export const S_RgbInput = styled.input.attrs({
-  type: "number",
-  min: 0,
-  max: 255,
-})`
+export const S_RgbInput = styled.input`
   width: 50px;
 `;
 
-export const S_HsvInput = styled.input.attrs({
-  type: "number",
-  min: 0,
-})`
+export const S_HslInput = styled.input`
   width: 50px;
 `;
 
-export const S_HexInput = styled.input`
+export const S_HexInput = styled.input<{ $invalid: boolean }>`
   width: 100px;
-`;
-
-export const S_Error = styled.span`
-  color: ${({ theme }) => theme.colors.textError};
+  
+  ${({ $invalid }) => $invalid && css`
+    outline: 2px solid red !important;
+  `}
 `;

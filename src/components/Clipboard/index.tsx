@@ -5,16 +5,14 @@ import type { ColorMode } from "../../types/ColorMode";
 import { Check, Copy } from "lucide-react";
 import useLocalStorage from "../../hooks/useLocalStorage";
 
-type ClipboardColorMode = Exclude<ColorMode, "HSV"> | "HSL";
-
 export default function Clipboard() {
   const { color } = useColorPicker();
-  const [colorMode, setColorMode] = useLocalStorage<ClipboardColorMode>("colorModeClipboard", "RGB");
+  const [colorMode, setColorMode] = useLocalStorage<ColorMode>("colorModeClipboard", "rgb");
   const [copied, setCopied] = useState(false);
 
-  const toCopy = colorMode === "HEX" 
+  const toCopy = colorMode === "hex" 
     ? color.hex() 
-    : color.css(colorMode.toLowerCase() as "rgb" | "hsl");
+    : color.css(colorMode as "rgb" | "hsl");
 
   const handleCopyToClipboard = async () => {
     if (!copied) {
@@ -29,11 +27,11 @@ export default function Clipboard() {
       <S_Select 
         id="colorModeClipboard" 
         value={colorMode}
-        onChange={(e) => setColorMode(e.target.value as ClipboardColorMode)}
+        onChange={(e) => setColorMode(e.target.value as ColorMode)}
       >
-        <option value="RGB">RGB</option>
-        <option value="HSL">HSL</option>
-        <option value="HEX">HEX</option>
+        <option value="rgb">RGB</option>
+        <option value="hsl">HSL</option>
+        <option value="hex">HEX</option>
       </S_Select>
 
       <S_SelectedColorModeToCopy 

@@ -1,10 +1,10 @@
 import type { ColorMode } from "../../../types/ColorMode";
-import { HexSelector, HsvSelector, RgbSelector } from "./ValuesSelector";
+import { HexSelector, HslSelector, RgbSelector } from "./ValuesSelector";
 import { S_Container, S_Select, S_ValuesSelectorContainer } from "./styles";
 import useLocalStorage from "../../../hooks/useLocalStorage";
 
 export default function ColorModeAndValuesSelector() {
-  const [colorMode, setColorMode] = useLocalStorage<ColorMode>("colorMode", "RGB");
+  const [colorMode, setColorMode] = useLocalStorage<ColorMode>("colorMode", "rgb");
   
   return (
     <S_Container>
@@ -13,15 +13,15 @@ export default function ColorModeAndValuesSelector() {
         value={colorMode}
         onChange={(e) => setColorMode(e.target.value as ColorMode)}
       >
-        <option value="RGB">RGB</option>
-        <option value="HSV">HSV</option>
-        <option value="HEX">HEX</option>
+        <option value="rgb">RGB</option>
+        <option value="hsl">HSL</option>
+        <option value="hex">HEX</option>
       </S_Select>
 
       <S_ValuesSelectorContainer>
-        {colorMode === "RGB" && <RgbSelector />}
-        {colorMode === "HSV" && <HsvSelector />}
-        {colorMode === "HEX" && <HexSelector />}
+        {colorMode === "rgb" && <RgbSelector />}
+        {colorMode === "hsl" && <HslSelector />}
+        {colorMode === "hex" && <HexSelector />}
       </S_ValuesSelectorContainer>
     </S_Container>
   );

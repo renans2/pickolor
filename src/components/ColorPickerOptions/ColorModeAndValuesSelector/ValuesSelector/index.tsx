@@ -1,7 +1,7 @@
 import { useColorPicker } from "../../../../context/ColorPickerProvider";
 import chroma from "chroma-js";
 import { useEffect, useState } from "react";
-import { S_Error, S_HexInput, S_HsvInput, S_RgbInput } from "./styles";
+import { S_HexInput, S_HslInput, S_RgbInput } from "./styles";
 
 export function RgbSelector() {
   const { rgb, color, setColor } = useColorPicker();
@@ -20,6 +20,9 @@ export function RgbSelector() {
         <span>R: </span>
         <S_RgbInput 
           id="r"
+          type="number"
+          min={0}
+          max={255}
           value={rgb[0]}
           onChange={(e) => handleChangeRgbChannel(e, "r")}
         />
@@ -29,6 +32,9 @@ export function RgbSelector() {
         <span>G: </span>
         <S_RgbInput 
           id="g"
+          type="number"
+          min={0}
+          max={255}
           value={rgb[1]}
           onChange={(e) => handleChangeRgbChannel(e, "g")}
         />
@@ -38,6 +44,9 @@ export function RgbSelector() {
         <span>B: </span>
         <S_RgbInput 
           id="b"
+          type="number"
+          min={0}
+          max={255}
           value={rgb[2]}
           onChange={(e) => handleChangeRgbChannel(e, "b")}
         />
@@ -46,16 +55,16 @@ export function RgbSelector() {
   );
 }
 
-export function HsvSelector() {
-  const { hsv, color, setColor } = useColorPicker();
+export function HslSelector() {
+  const { hsl, color, setColor } = useColorPicker();
 
-  const handleChangeHsvChannel = (
+  const handleChangeHslChannel = (
     e: React.ChangeEvent<HTMLInputElement>, 
-    channel: "h" | "s" | "v", 
+    channel: "h" | "s" | "l", 
   ) => {
     let val = parseInt(e.target.value);
     val = channel === "h" ? val : val / 100;
-    const newColor = color.set(`hsv.${channel}`, val);
+    const newColor = color.set(`hsl.${channel}`, val);
     setColor(newColor);
   }
 
@@ -63,31 +72,37 @@ export function HsvSelector() {
     <>
       <label htmlFor="h">
         <span>H: </span>
-        <S_HsvInput 
+        <S_HslInput
           id="h"
+          type="number"
+          min={0}
           max={360}
-          value={Math.round(hsv[0])}
-          onChange={(e) => handleChangeHsvChannel(e, "h")}
+          value={Math.round(hsl[0])}
+          onChange={(e) => handleChangeHslChannel(e, "h")}
         />
       </label>
 
       <label htmlFor="s">
         <span>S: </span>
-        <S_HsvInput 
+        <S_HslInput 
           id="s"
+          type="number"
+          min={0}
           max={100}
-          value={Math.round(hsv[1] * 100)}
-          onChange={(e) => handleChangeHsvChannel(e, "s")}
+          value={Math.round(hsl[1] * 100)}
+          onChange={(e) => handleChangeHslChannel(e, "s")}
         />
       </label>
 
-      <label htmlFor="v">
-        <span>V: </span>
-        <S_HsvInput 
-          id="v"
+      <label htmlFor="l">
+        <span>L: </span>
+        <S_HslInput 
+          id="l"
+          type="number"
+          min={0}
           max={100}
-          value={Math.round(hsv[2] * 100)}
-          onChange={(e) => handleChangeHsvChannel(e, "v")}
+          value={Math.round(hsl[2] * 100)}
+          onChange={(e) => handleChangeHslChannel(e, "l")}
         />
       </label>
     </>
@@ -127,12 +142,9 @@ export function HexSelector() {
           type="text"
           value={hexInput}
           onChange={handleChangeHexColor}
+          $invalid={invalid}
         />
       </label>
-
-      {invalid && (
-        <S_Error>The input is invalid!</S_Error>
-      )}
     </>
   );
 }
