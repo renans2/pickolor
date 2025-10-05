@@ -1,9 +1,9 @@
 import type { DefaultTheme } from "styled-components";
 
 export const theme: DefaultTheme = {
-  border: "1px solid #AFAFAF",
+  border: "1px solid #afafafac",
   shadow: {
-    surface: "1px 1px 7px rgba(0, 0, 0, 0.25)",
+    surface: "1px 1px 5px rgba(0, 0, 0, 0.2)",
     detail: "0px 2px 3px rgba(0, 0, 0, 0.25)",
     detailSmall: "1px 1px 3px rgba(0, 0, 0, 0.15)",
   },

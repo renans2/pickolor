@@ -14,7 +14,7 @@ export const S_ColorPickerRect = styled(S_MainSurface).attrs<{
   grid-area: pickerRect;
   width: 100%;
   height: 100%;
-  border-radius: ${({ theme }) => theme.rounded.sm};
+  border: none;
   position: relative;
 
   &::before, &::after {
