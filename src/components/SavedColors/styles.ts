@@ -53,15 +53,6 @@ export const S_SavedColorsList = styled.ul`
   overflow-y: auto;
   overflow-x: hidden;
 
-  &::-webkit-scrollbar {
-    background-color: transparent;
-    width: 10px;
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background-color: rgba(0, 0, 0, .3);
-  }
-
   > :last-child {
     margin-bottom: 2px;
   }
