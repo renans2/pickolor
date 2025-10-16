@@ -111,14 +111,6 @@ export const S_OptionsButton = styled.button`
   aspect-ratio: 1;
   border-radius: 1000px;
   border: 1px solid #0000001f;
-
-  &:hover {
-    filter: brightness(.85);
-  }
-
-  &:disabled {
-    filter: brightness(.9);
-  }
 `;
 
 export const S_SmallColorPreview = styled.div.attrs<{

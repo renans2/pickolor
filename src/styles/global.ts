@@ -19,11 +19,13 @@ export const GlobalStyles = createGlobalStyle`
     outline: 2px solid ${({ theme }) => theme.colors.textPrimary};
   }
 
-  button:not(:disabled) {
+  button:not(:disabled):hover {
     cursor: pointer;
+    filter: brightness(0.95);
   }
 
   button:disabled {
     cursor: not-allowed;
+    opacity: 0.4;
   }
 `;
