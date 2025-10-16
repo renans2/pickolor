@@ -15,13 +15,13 @@ export const S_HueSlider = styled.input`
     height: 10px;
     border-radius: 100px;
     background: linear-gradient(
-      to right, 
-      hsl(0, 100%, 50%), 
-      hsl(60, 100%, 50%), 
-      hsl(120, 100%, 50%), 
-      hsl(180, 100%, 50%), 
-      hsl(240, 100%, 50%), 
-      hsl(300, 100%, 50%), 
+      to right,
+      hsl(0, 100%, 50%),
+      hsl(60, 100%, 50%),
+      hsl(120, 100%, 50%),
+      hsl(180, 100%, 50%),
+      hsl(240, 100%, 50%),
+      hsl(300, 100%, 50%),
       hsl(360, 100%, 50%)
     );
   }
@@ -44,13 +44,13 @@ export const S_HueSlider = styled.input`
     height: 10px;
     border-radius: 100px;
     background: linear-gradient(
-      to right, 
-      hsl(0, 100%, 50%), 
-      hsl(60, 100%, 50%), 
-      hsl(120, 100%, 50%), 
-      hsl(180, 100%, 50%), 
-      hsl(240, 100%, 50%), 
-      hsl(300, 100%, 50%), 
+      to right,
+      hsl(0, 100%, 50%),
+      hsl(60, 100%, 50%),
+      hsl(120, 100%, 50%),
+      hsl(180, 100%, 50%),
+      hsl(240, 100%, 50%),
+      hsl(300, 100%, 50%),
       hsl(360, 100%, 50%)
     );
   }

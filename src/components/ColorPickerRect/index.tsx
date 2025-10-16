@@ -4,7 +4,7 @@ import chroma from "chroma-js";
 import { S_ColorPickerRect, S_ColorPin } from "./styles";
 
 export default function ColorPickerRect() {
-  const { 
+  const {
     pinPosition: { left, top },
     color,
     setColor,
@@ -23,12 +23,12 @@ export default function ColorPickerRect() {
     left = Math.max(0, Math.min(left, div.width));
     top = Math.max(0, Math.min(top, div.height));
 
-    const saturation = (left / div.width);
-    const value = (1 - (top / div.height));
+    const saturation = left / div.width;
+    const value = 1 - top / div.height;
 
     const newColor = chroma.hsv(hue, saturation, value);
     setColor(newColor);
-  }
+  };
 
   const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
     updatePinPosition(e.clientX, e.clientY);
@@ -60,7 +60,7 @@ export default function ColorPickerRect() {
   }, [isDragging]);
 
   return (
-    <S_ColorPickerRect 
+    <S_ColorPickerRect
       ref={pickerRef}
       onClick={handleClick}
       onMouseDown={handleMouseDown}
@@ -68,8 +68,8 @@ export default function ColorPickerRect() {
       $isDragging={isDragging}
     >
       <S_ColorPin 
-        $left={left}
-        $top={top}
+        $left={left} 
+        $top={top} 
         $color={color}
       />
     </S_ColorPickerRect>

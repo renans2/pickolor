@@ -99,17 +99,12 @@ export default function SavedColors() {
 
   return (
     <S_Container>
-      <S_SaveButton
-        $color={color}
-        onClick={handleSaveNewColor}
-      >
+      <S_SaveButton $color={color} onClick={handleSaveNewColor}>
         Save color
       </S_SaveButton>
 
       {savedColors.length === 0 ? (
-        <S_NoColorsSaved>
-          Empty!
-        </S_NoColorsSaved>
+        <S_NoColorsSaved>Empty!</S_NoColorsSaved>
       ) : (
         <S_SavedColorsList ref={ulRef}>
           <AnimatePresence mode="popLayout">
@@ -165,7 +160,9 @@ export default function SavedColors() {
                 <S_SmallColorPreview
                   $clickable={editingColorId === undefined}
                   $color={
-                    editingColorId === savedColor.id ? color.hex() : savedColor.color
+                    editingColorId === savedColor.id
+                      ? color.hex()
+                      : savedColor.color
                   }
                   onClick={() => {
                     if (!editingColorId)
@@ -177,7 +174,6 @@ export default function SavedColors() {
           </AnimatePresence>
         </S_SavedColorsList>
       )}
-
     </S_Container>
   );
 }

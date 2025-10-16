@@ -8,10 +8,10 @@ export default function HueSlider() {
   const handleHueChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newColor = color.set("hsl.h", parseInt(e.target.value));
     setColor(newColor);
-  }
+  };
 
   return (
-    <S_HueSlider 
+    <S_HueSlider
       id="hueSlider"
       type="range"
       min={0}

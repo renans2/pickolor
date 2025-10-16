@@ -65,7 +65,9 @@ const activeStyle = css`
   }
 `;
 
-export const S_SavedColorItem = styled(motion.li)<{ $isEditingThisColorItem?: boolean; }>`
+export const S_SavedColorItem = styled(motion.li)<{ 
+  $isEditingThisColorItem?: boolean;
+}>`
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -123,14 +125,16 @@ export const S_SmallColorPreview = styled.div.attrs<{
       border-width: 2px;
       border-color: black;
     }
-  `}
+  `};
 
-  cursor: ${({ $clickable }) =>
-    $clickable || $clickable === undefined  ? "pointer" : "not-allowed"};
+  cursor: ${({ $clickable }) => $clickable || $clickable === undefined 
+    ? "pointer" 
+    : "not-allowed"
+  };
 
   @media (max-width: 768px) {
     width: 100%;
-  }
+  };
 `;
 
 export const S_NoColorsSaved = styled.p`

@@ -52,6 +52,6 @@ export const S_ColorPin = styled.div.attrs<{
   border: 3px solid white;
   z-index: 1;
   background-color: black;
-  box-shadow: 0 0 3px rgba(0,0,0,0.8);
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.8);
   pointer-events: none;
 `;

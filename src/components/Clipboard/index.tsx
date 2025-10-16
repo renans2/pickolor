@@ -7,8 +7,8 @@ import useLocalStorage from "../../hooks/useLocalStorage";
 
 export default function Clipboard() {
   const { color } = useColorPicker();
-  const [colorMode, setColorMode] = useLocalStorage<ColorMode>("colorModeClipboard", "rgb");
   const [copied, setCopied] = useState(false);
+  const [colorMode, setColorMode] = useLocalStorage<ColorMode>("colorModeClipboard", "rgb");
 
   const toCopy = colorMode === "hex" 
     ? color.hex() 
@@ -20,7 +20,7 @@ export default function Clipboard() {
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     }
-  }
+  };
 
   return (
     <S_Container>
@@ -34,17 +34,12 @@ export default function Clipboard() {
         <option value="hex">HEX</option>
       </S_Select>
 
-      <S_SelectedColorModeToCopy 
+      <S_SelectedColorModeToCopy
         onClick={handleCopyToClipboard}
         $copied={copied}
       >
         <span>{toCopy}</span>
-        
-        {copied ? (
-          <Check size={20} />
-        ) : (
-          <Copy size={20} />
-        )}
+        {copied ? <Check size={20} /> : <Copy size={20} />}
       </S_SelectedColorModeToCopy>
     </S_Container>
   );

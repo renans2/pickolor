@@ -30,6 +30,6 @@ export const S_SelectedColorModeToCopy = styled.div<{ $copied: boolean }>`
   cursor: ${({ $copied }) => $copied ? "default" : "pointer"};
 
   &:hover {
-    background-color: rgba(0, 0, 0, .05);
+    background-color: rgba(0, 0, 0, 0.05);
   }
 `;

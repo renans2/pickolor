@@ -18,7 +18,7 @@ export const S_Header = styled.header`
     background-position: right top;
 
     > h1 {
-      text-shadow: 0 0 3px white;    
+      text-shadow: 0 0 3px white;
     }
   }
 

@@ -5,14 +5,17 @@ import Clipboard from "./components/Clipboard";
 import { GlobalStyles } from "./styles/global";
 import { theme } from "./styles/theme";
 import SavedColors from "./components/SavedColors";
-import { COLOR_PICKER_RECT_HEIGHT, COLOR_PICKER_RECT_WIDTH } from "./constants/dimensions";
+import {
+  DESKTOP_COLOR_PICKER_RECT_WIDTH,
+  DESKTOP_COLOR_PICKER_RECT_HEIGHT,
+} from "./constants/dimensions";
 import Header from "./components/Header";
 import ColorPickerRect from "./components/ColorPickerRect";
 import ColorPickerOptions from "./components/ColorPickerOptions";
 import useMediaQuery from "./hooks/useMediaQuery";
 
 export default function App() {
-  const isDesktop = useMediaQuery("(min-width: 768px)")
+  const isDesktop = useMediaQuery("(min-width: 768px)");
 
   return (
     <ThemeProvider theme={theme}>
@@ -28,7 +31,7 @@ export default function App() {
         </S_MainContainer>
       </ColorPickerProvider>
     </ThemeProvider>
-  )
+  );
 }
 
 const S_MainContainer = styled.main`
@@ -52,8 +55,8 @@ const S_MainContainer = styled.main`
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    grid-template-columns: ${COLOR_PICKER_RECT_WIDTH}px .5fr 1fr;
-    grid-template-rows: ${COLOR_PICKER_RECT_HEIGHT}px auto;
+    grid-template-columns: ${DESKTOP_COLOR_PICKER_RECT_WIDTH}px 0.5fr 1fr;
+    grid-template-rows: ${DESKTOP_COLOR_PICKER_RECT_HEIGHT}px auto;
     grid-template-areas:
       "pickerRect preview savedColors"
       "pickerOptions pickerOptions clipboard";

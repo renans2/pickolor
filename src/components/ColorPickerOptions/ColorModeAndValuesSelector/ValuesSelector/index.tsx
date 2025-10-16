@@ -2,23 +2,24 @@ import { useColorPicker } from "../../../../context/ColorPickerProvider";
 import chroma from "chroma-js";
 import { useEffect, useState } from "react";
 import { S_HexInput, S_HslInput, S_RgbInput } from "./styles";
+import { HEX_REG_EXP } from "../../../../constants/hexRegExp";
 
 export function RgbSelector() {
   const { rgb, color, setColor } = useColorPicker();
 
   const handleChangeRgbChannel = (
-    e: React.ChangeEvent<HTMLInputElement>, 
-    channel: "r" | "g" | "b", 
+    e: React.ChangeEvent<HTMLInputElement>,
+    channel: "r" | "g" | "b"
   ) => {
     const newColor = color.set(`rgb.${channel}`, parseInt(e.target.value));
     setColor(newColor);
-  }
+  };
 
   return (
     <>
       <label htmlFor="r">
         <span>R: </span>
-        <S_RgbInput 
+        <S_RgbInput
           id="r"
           type="number"
           min={0}
@@ -30,7 +31,7 @@ export function RgbSelector() {
 
       <label htmlFor="g">
         <span>G: </span>
-        <S_RgbInput 
+        <S_RgbInput
           id="g"
           type="number"
           min={0}
@@ -42,7 +43,7 @@ export function RgbSelector() {
 
       <label htmlFor="b">
         <span>B: </span>
-        <S_RgbInput 
+        <S_RgbInput
           id="b"
           type="number"
           min={0}
@@ -59,14 +60,14 @@ export function HslSelector() {
   const { hsl, color, setColor } = useColorPicker();
 
   const handleChangeHslChannel = (
-    e: React.ChangeEvent<HTMLInputElement>, 
-    channel: "h" | "s" | "l", 
+    e: React.ChangeEvent<HTMLInputElement>,
+    channel: "h" | "s" | "l"
   ) => {
     let val = parseInt(e.target.value);
     val = channel === "h" ? val : val / 100;
     const newColor = color.set(`hsl.${channel}`, val);
     setColor(newColor);
-  }
+  };
 
   return (
     <>
@@ -84,7 +85,7 @@ export function HslSelector() {
 
       <label htmlFor="s">
         <span>S: </span>
-        <S_HslInput 
+        <S_HslInput
           id="s"
           type="number"
           min={0}
@@ -96,7 +97,7 @@ export function HslSelector() {
 
       <label htmlFor="l">
         <span>L: </span>
-        <S_HslInput 
+        <S_HslInput
           id="l"
           type="number"
           min={0}
@@ -109,8 +110,6 @@ export function HslSelector() {
   );
 }
 
-const HEX6 = /^#[0-9A-Fa-f]{6}$/;
-
 export function HexSelector() {
   const { hex, setColor } = useColorPicker();
   const [hexInput, setHexInput] = useState(hex);
@@ -120,14 +119,14 @@ export function HexSelector() {
     let input = e.target.value;
     setHexInput(input);
 
-    if (HEX6.test(input)) {
+    if (HEX_REG_EXP.test(input)) {
       const newColor = chroma(e.target.value);
       setColor(newColor);
       setInvalid(false);
     } else {
       setInvalid(true);
     }
-  }
+  };
 
   useEffect(() => {
     setHexInput(hex);
@@ -137,7 +136,7 @@ export function HexSelector() {
   return (
     <>
       <label htmlFor="hex">
-        <S_HexInput 
+        <S_HexInput
           id="hex"
           type="text"
           value={hexInput}
