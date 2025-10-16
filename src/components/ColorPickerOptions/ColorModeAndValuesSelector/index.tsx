@@ -1,7 +1,9 @@
 import type { ColorMode } from "../../../types/ColorMode";
-import { HexSelector, HslSelector, RgbSelector } from "./ValuesSelector";
 import { S_Container, S_Select, S_ValuesSelectorContainer } from "./styles";
 import useLocalStorage from "../../../hooks/useLocalStorage";
+import RgbSelector from "./RgbSelector";
+import HslSelector from "./HslSelector";
+import HexSelector from "./HexSelector";
 
 export default function ColorModeAndValuesSelector() {
   const [colorMode, setColorMode] = useLocalStorage<ColorMode>("colorMode", "rgb");
